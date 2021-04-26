@@ -1,9 +1,34 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>randomizacoes</ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true">
+	<div class="background_logo_nuzlocke">
+		<ion-img class="img_logo_nuzlocke" src="./assets/images/logo_nuzlocke_creator.png">
+		</ion-img>
+	</div>
 </ion-header>
 
-<ion-content>
+<ion-content class="background" [fullscreen]="true">
+	<ion-label class="rule_options" style="top: 140px;">
+		{{category.name}}
+	</ion-label>
+
+	<ion-item class="rule_options" style="top: 210px; ">
+		<ion-label class="ubuntu_font">
+			{{category.options[0].name}}
+		</ion-label>
+		<ion-toggle [(ngModel)]="category.options[0].selected" slot="end"></ion-toggle>
+	</ion-item>
+	<ion-item class="rule_options" style="top: 250px; ">
+		<ion-label class="ubuntu_font">
+			{{category.options[1].name}}
+		</ion-label>
+		<ion-toggle [(ngModel)]="category.options[1].selected" slot="end"></ion-toggle>
+	</ion-item>
+
+  <ion-button class="return_button" routerLink="/criar/ginasios">
+		Voltar
+		<ion-icon slot="start" name="arrow-back-circle-outline"></ion-icon>
+	</ion-button>
+
+	<ion-img (click)="printOption()" routerLink="/criar" class="next_button" src="./assets/images/pokeball_button.png"></ion-img>
+
 
 </ion-content>
