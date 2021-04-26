@@ -1,9 +1,61 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>pokemon-manager</ion-title>
-  </ion-toolbar>
+	<ion-toolbar class="pokemon-toolbar-theme">
+		<ion-title class="title_style">Nuzlocke da quarentena</ion-title>
+		<ion-buttons slot="start" icon="add">
+			<ion-menu-button menu="main-menu"></ion-menu-button>
+		</ion-buttons>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
+	<ion-item>
+		<ion-list>
+			<ion-label class="label_style" style="font-size: 20px; padding: 10px 0px 0px 10px;">Party</ion-label><br>
 
+			<ion-item *ngFor="let pokemon of partyPokemon" [routerLink]="pokemon.url">
+				<ion-img [src]="pokemon.iconSource"></ion-img>
+				<ion-label *ngIf="pokemon.nickname != null; else noNickname" class="pokemon_description">{{
+					pokemon.species }}
+					<br>({{ pokemon.nickname }})
+				</ion-label>
+				<ion-text class="pokemon_description">Level: {{ pokemon.level }}</ion-text>
+
+				<ng-template #noNickname>
+					<ion-label class="pokemon_description">{{ pokemon.species }}</ion-label>
+				</ng-template>
+			</ion-item>
+		</ion-list>
+	</ion-item>
+	<ion-item>
+		<ion-list>
+			<ion-label class="label_style" style="font-size: 20px; padding: 10px 0px 0px 10px;">Box</ion-label><br>
+
+			<ion-item *ngFor="let pokemon of boxedPokemon" [routerLink]="pokemon.url">
+				<ion-img [src]="pokemon.iconSource"></ion-img>
+				<ion-label *ngIf="pokemon.nickname != null; else noNickname" class="pokemon_description">{{ pokemon.species }}
+					<br>({{ pokemon.nickname }})</ion-label>
+				<ion-text class="pokemon_description">Level: {{ pokemon.level }}</ion-text>
+
+				<ng-template #noNickname>
+					<ion-label class="pokemon_description">{{ pokemon.species }}</ion-label>
+				</ng-template>
+			</ion-item>
+		</ion-list>
+	</ion-item>
+	<ion-item>
+		<ion-list>
+			<ion-label class="label_style" style="font-size: 20px; padding: 10px 0px 0px 10px;">Mortos</ion-label><br>
+
+			<ion-item *ngFor="let pokemon of deadPokemon" [routerLink]="pokemon.url">
+				<ion-img [src]="pokemon.iconSource"></ion-img>
+				<ion-label *ngIf="pokemon.nickname != null; else noNickname" class="pokemon_description">{{ pokemon.species }}
+					<br>({{ pokemon.nickname }})</ion-label>
+				<ion-text class="pokemon_description">Level: {{ pokemon.level }}</ion-text>
+
+				<ng-template #noNickname>
+					<ion-label class="pokemon_description">{{ pokemon.species }}</ion-label>
+				</ng-template>
+			</ion-item>
+		</ion-list>
+	</ion-item>
 </ion-content>

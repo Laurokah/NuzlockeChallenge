@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-	selector: 'app-pokemon-manager',
-	templateUrl: './pokemon-manager.page.html',
-	styleUrls: ['./pokemon-manager.page.scss'],
+	selector: 'app-edit',
+	templateUrl: './edit.page.html',
+	styleUrls: ['./edit.page.scss'],
 })
-export class PokemonManagerPage implements OnInit {
+export class EditPage implements OnInit {
 
-	constructor() { }
+	constructor(private route: ActivatedRoute) { 
+		this.pokemon_to_pass = this.allPokemon.find(pokemon => pokemon.id == this.idValue)
+	}
 
 	ngOnInit() {
 	}
 
-	public partyPokemon = [
+	public idValue = Number.parseInt(this.route.snapshot.paramMap.get('id'));
+	public pokemon_to_pass;
+
+	public allPokemon = [
 		{
 			id: 5,
 			url: 'edit/5',
@@ -62,7 +68,7 @@ export class PokemonManagerPage implements OnInit {
 			level: 18,
 			status: 'Party',
 			evolvingDisabled: true
-		},
+		}, 
 		{
 			id: 134,
 			url: 'edit/134',
@@ -72,10 +78,7 @@ export class PokemonManagerPage implements OnInit {
 			level: 20,
 			status: 'Party',
 			evolvingDisabled: true
-		}
-	];
-
-	public boxedPokemon = [
+		},
 		{
 			id: 42,
 			url: 'edit/42',
@@ -105,10 +108,7 @@ export class PokemonManagerPage implements OnInit {
 			level: 10,
 			status: 'Box',
 			evolvingDisabled: false
-		}
-	];
-
-	public deadPokemon = [
+		},
 		{
 			id: 81,
 			url: 'edit/81',
@@ -118,7 +118,7 @@ export class PokemonManagerPage implements OnInit {
 			level: 25,
 			status: 'Morto',
 			evolvingDisabled: false
-		},
+		}, 
 		{
 			id: 25,
 			url: 'edit/25',
@@ -130,4 +130,6 @@ export class PokemonManagerPage implements OnInit {
 			evolvingDisabled: false
 		}
 	];
+
+
 }

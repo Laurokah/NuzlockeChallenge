@@ -1,0 +1,13 @@
+<ion-header>
+	<ion-toolbar class="pokemon-toolbar-theme">
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="/nuzlocke/pokemon-manager">
+			</ion-back-button>
+		</ion-buttons>
+		<ion-title class="label_style" style="text-align: left; font-size: 20px; line-height: 20px;">Editar Pokémon</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<app-caught-pokemon-edit [pokemon_chosen]="pokemon_to_pass"></app-caught-pokemon-edit>
+</ion-content>
