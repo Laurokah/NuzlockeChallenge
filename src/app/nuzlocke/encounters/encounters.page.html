@@ -2,8 +2,38 @@
   <ion-toolbar>
     <ion-title>encounters</ion-title>
   </ion-toolbar>
+	<ion-toolbar class="pokemon-toolbar-theme">
+		<ion-title class="title_style">Nuzlocke da quarentena</ion-title>
+		<ion-buttons slot="start" icon="add">
+			<ion-menu-button menu="main-menu"></ion-menu-button>
+		</ion-buttons>
+	</ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content>
+	<ion-list class="label_style" *ngFor="let route of routes">
+		<ion-item>
+			<ion-label (click)="route.waiting? hasEncounterFailed(routes.indexOf(route)): makeNothing()" class="label_style">{{ route.name }}</ion-label>
+			<ion-icon slot="start" [name]="route.iconName"></ion-icon>
+
+			<ion-item *ngIf="route.successful && route.pokemonSpecies != ''">
+				<ion-img [src]="route.pokemon.iconSource"></ion-img>
+				<ion-label *ngIf="route.pokemonNickname != ''; else noNickname" class="pokemon_detail_style">{{ route.pokemonSpecies }}
+					<br>({{ route.pokemonNickname }})
+					<br>Level: {{ route.pokemonLevel }}
+				</ion-label>
+
+
+				<ng-template #noNickname>
+					<ion-label class="pokemon_detail_style">{{ route.pokemonSpecies }}
+						<br>Level: {{ route.pokemonLevel }}
+					</ion-label>
+				</ng-template>
+			</ion-item>
+		</ion-item>
+	</ion-list>
+
+
+</ion-content>
 </ion-content>
