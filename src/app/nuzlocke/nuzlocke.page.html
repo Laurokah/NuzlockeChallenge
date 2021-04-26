@@ -1,3 +1,27 @@
+<ion-menu contentId="menu-content" menuId="main-menu" side="start" type="overlay">
+	<ion-header >
+		<ion-toolbar class="background_menu_toolbar">
+			<ion-img class="img_logo_nuzlocke" src="./assets/images/logo_nuzlocke_creator.png">
+			</ion-img>
+		</ion-toolbar>
+	</ion-header>
+	<ion-content>
+		<ion-item routerLink="/home">
+			<ion-icon slot="start" name="home"></ion-icon>
+			<ion-label class="label_style">Home Page</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-icon slot="start" name="trophy"></ion-icon>
+			<ion-label class="label_style">Finalizar Nuzlocke</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-icon slot="start" name="people"></ion-icon>
+			<ion-label class="label_style">Sobre nós</ion-label>
+		</ion-item>
+	</ion-content>
+</ion-menu>
+<ion-router-outlet id="menu-content"></ion-router-outlet>
+
 <ion-tabs>
 	<ion-tab-bar class="pokemon-tab-theme" slot="bottom">
 		<ion-tab-button class="pokemon-tab-theme" tab="pokemon-manager">
