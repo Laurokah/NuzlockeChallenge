@@ -1,18 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { AlertController} from '@ionic/angular';
 @Component({
-  selector: 'app-encounters',
-  templateUrl: './encounters.page.html',
-  styleUrls: ['./encounters.page.scss'],
 	selector: 'app-encounters',
 	templateUrl: './encounters.page.html',
 	styleUrls: ['./encounters.page.scss'],
 })
 export class EncountersPage implements OnInit {
 
-  constructor() { }
-	constructor(private alertCtrl: AlertController) { }
+	constructor(private alertCtrl: AlertController, private router: Router) { }
 
 	ngOnInit() {
 	}
@@ -118,8 +114,6 @@ export class EncountersPage implements OnInit {
 		}
 	];
 
-  ngOnInit() {
-  }
 	public makeNothing() { }
 	public async hasEncounterFailed(routeIndex: number) {
 		const alert = await this.alertCtrl.create({
@@ -128,7 +122,7 @@ export class EncountersPage implements OnInit {
 			buttons: [
 				{
 					text: 'Sim',
-					handler: () => this.changeEncounterStatus(routeIndex, true)
+					handler: () => this.registerSuccessfulEncounter(routeIndex)
 				},
 				{
 					text: 'Não',
@@ -138,6 +132,11 @@ export class EncountersPage implements OnInit {
 			]
 		});
 		alert.present();
+	}
+
+	public registerSuccessfulEncounter(routeIndex: number) {
+		this.router.navigate(['/nuzlocke/encounters/register']);
+		this.changeEncounterStatus(routeIndex, true)
 	}
 
 	public changeEncounterStatus(routeIndex: number, successful: boolean) {

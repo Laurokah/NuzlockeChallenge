@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+.input_style{
+	font-size: 15px; 
+    font-weight: normal;
+	font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	line-height: 21px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+
+.label_style{
+	font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 21px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+
+.pokemon-toolbar-theme{
+    --background: #f37a36;
+    --color: #000000;
+}
+
+.pokemon_description{
+	font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-size: 14px;
+	line-height: 15px;
+	display: flex;
+	text-align: center;
+
+	padding-right: 30px;
+}
+
+.saveButton{
+    --background: #f5a06f;
+}
