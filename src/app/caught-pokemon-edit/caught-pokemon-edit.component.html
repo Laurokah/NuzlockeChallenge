@@ -27,7 +27,7 @@
 						[(ngModel)]="pokemon_chosen.level"></ion-input>
 				</ion-col>
 				<ion-col size="3">
-					<ion-button class="return_button">
+					<ion-button class="return_button" [disabled]="pokemon_chosen.status == 'Morto'" (click)="levelUp()">
 						Upar
 						<ion-icon slot="start" name="chevron-up"></ion-icon>
 					</ion-button>
@@ -35,7 +35,7 @@
 				<ion-col size="1">
 				</ion-col>
 				<ion-col size="5">
-					<ion-button class="return_button"
+					<ion-button (click)="confirmEvolution()" [disabled]="pokemon_chosen.evolvingDisabled || pokemon_chosen.status == 'Morto'" class="return_button"
 						style="color: black;">
 						<ion-img style="width: 20px;" src="./assets/images/evolve_icon.png"></ion-img>
 						&nbsp;Evoluir
