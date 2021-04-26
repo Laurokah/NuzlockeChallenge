@@ -15,10 +15,10 @@ const routes: Routes = [
 		path: 'criar',
 		loadChildren: () => import('./criar/criar.module').then(m => m.CriarPageModule)
 	},
-  {
-    path: 'criar',
-    loadChildren: () => import('./criar/criar.module').then( m => m.CriarPageModule)
-  },
+	{
+		path: 'nuzlocke',
+		loadChildren: () => import('./nuzlocke/nuzlocke.module').then(m => m.NuzlockePageModule)
+	},
 ];
 
 @NgModule({
