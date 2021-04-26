@@ -1,27 +1,111 @@
-#container {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.background_logo_nuzlocke {
+	background: #f37a36;
+	position: absolute;
+	width: 100%;
+	height: 120px;
+	border-radius: 0px 0px 28px 28px;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.background{
+	--background: url('/assets/images/background_pokeball.jpg')0 0/100% 100% no-repeat;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.img_logo_nuzlocke{
+	height: 110px;
+	width: auto;
+	margin: auto;
+	display: block;
 }
 
-#container a {
-  text-decoration: none;
+.home_options_left{
+	position: absolute;
+	width: 320px;
+	height: 85px;
+	left: 115px;
+	top: 180px;
+
+	background: #C4C4C4;
+	border-radius: 24px;
+
+	padding-left: 60px;
+	font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 21px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+
+	padding-right: 60px;
+}
+
+.img_ash_home{
+	height: 130px;
+}
+
+.home_options_right{
+	position: absolute;
+	width: 320px;
+	height: 85px;
+	left: -22px;
+	top: 300px;
+
+	background: #C4C4C4;
+	border-radius: 24px;
+
+	padding-left: 25px;
+	font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 21px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+
+	padding-right: 15px;
+}
+
+.home_about-us{
+	position: absolute;
+	width: 150px;
+	height: 150px;
+	left: 33px;
+	top: 410px;
+
+	font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 21px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+
+	background: #C4C4C4;
+	border-radius: 29px;
+
+	padding-left: 20px;
+}
+
+.img_starters{
+	height: 110px;
+}
+
+.img_about-us{
+	position: absolute;
+	margin-right: -30px;
+	padding-left: 60px;
+	display: block;
+	height: 250px;
+}
+
+.img_logo_config{
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	top: 560px;
 }

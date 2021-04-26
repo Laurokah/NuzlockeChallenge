@@ -9,4 +9,6 @@ export class HomePage {
 
   constructor() {}
 
+  public starters_img_source = './starters.png';
+
 }
