@@ -21,8 +21,13 @@ const routes: Routes = [
 	},
 	{
 		path: 'about',
-		loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
-	  },
+		loadChildren: () => import('./about/about.module').then(m => m.AboutPageModule)
+	},
+	{
+		path: 'saves',
+		loadChildren: () => import('./saves/saves.module').then(m => m.SavesPageModule)
+	},
+
 ];
 
 @NgModule({

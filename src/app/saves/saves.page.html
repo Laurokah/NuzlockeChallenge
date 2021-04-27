@@ -1,0 +1,43 @@
+<ion-header>
+	<ion-toolbar class="pokemon-toolbar-theme">
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="/home">
+			</ion-back-button>
+		</ion-buttons>
+		<ion-title class="label_style">Selecione um Nuzlocke</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<ion-list>
+		<ion-item *ngFor="let nuzlocke of nuzlockes" (click)="redirectToNuzlocke(nuzlocke.name)">
+			<ion-grid>
+				<ion-row>
+					<ion-col size="5">
+						<ion-text class="title_style">{{nuzlocke.name}}</ion-text>
+					</ion-col>
+					<ion-col size="7">
+						<ion-row>
+							<ion-col size="12">
+								<ion-text class="description_style">Pokémon {{nuzlocke.game}}</ion-text>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col size="12">
+								<ion-text class="description_style">Ginásios completos: {{nuzlocke.gyms}}</ion-text>																	
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col size="12">
+								<ion-badge [style]="nuzlocke.completed? '--background: green': '--background: red' ">
+									<ion-icon [name]="nuzlocke.completed? 'checkmark': 'close'"></ion-icon>
+								</ion-badge>
+							</ion-col>
+						</ion-row>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</ion-item>
+	</ion-list>
+</ion-content> 
