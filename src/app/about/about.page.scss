@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+.label_style{
+	font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 21px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+
+	padding: 10px 15px 10px 15px;
+}
+
+.pokemon-toolbar-theme{
+    --background: #f37a36;
+    --color: #000000;
+}
+
+.img_snorlax_about{
+	position: absolute;
+	right: 125px;
+	height: 200px;
+}
+
+.background{
+	--background: url('/assets/images/background_pokeball.jpg')0 0/100% 100% no-repeat;
+}

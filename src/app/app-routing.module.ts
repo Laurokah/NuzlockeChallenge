@@ -19,6 +19,10 @@ const routes: Routes = [
 		path: 'nuzlocke',
 		loadChildren: () => import('./nuzlocke/nuzlocke.module').then(m => m.NuzlockePageModule)
 	},
+	{
+		path: 'about',
+		loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
+	  },
 ];
 
 @NgModule({
