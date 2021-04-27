@@ -57,9 +57,16 @@ export class GymsPage implements OnInit {
 	];
 
 	public selectedBadgeNumber = 0;
+	public lastCompletedBadgeNumber = 0;
 
-	public async confirmGymCompletion(badgeNumber: number) {
+	public shouldGymBeMarked(badgeNumber: number){
 		this.selectedBadgeNumber = badgeNumber;
+		if(this.selectedBadgeNumber == this.lastCompletedBadgeNumber + 1){
+			this.confirmGymCompletion();
+		}
+	}
+
+	public async confirmGymCompletion() {
 		const alert = await this.alertCtrl.create({
 			header: 'Concluir ginásio',
 			message: 'Você deseja mesmo marcar esse ginásio como concluído?',
@@ -80,6 +87,7 @@ export class GymsPage implements OnInit {
 		);
 		concludedBadge.iconSource = concludedBadge.iconSource.substring(0, 28) + '.png';
 		concludedBadge.completed = true;
+		this.lastCompletedBadgeNumber = concludedBadge.number;
 
 		console.log('Ginásio nº ' + concludedBadge.number + ' concluído');
 	}
