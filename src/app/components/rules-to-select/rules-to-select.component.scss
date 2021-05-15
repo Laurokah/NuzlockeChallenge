@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+
+.background{
+	--background: url('/assets/images/background_pokeball.jpg')0 0/100% 100% no-repeat;
+}
+
+.rule_name_label{
+	position: absolute;
+	top: 140px;
+	left: 15px;
+	width: 90%;
+
+	font-family: Ubuntu;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 25px;
+	
+	align-items: center;
+	text-align: center;	
+}
+
+.rule_description_label{
+	position: absolute;
+	top: 180px;
+	left: 15px;
+	width: 90%;
+	color: rgb(109, 109, 109);
+
+	font-family: Ubuntu;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 12px;
+	
+	align-items: center;
+	text-align: center;	
+}
+
+.rule_options{
+	position: relative;
+	top: 250px;
+	left: 15px;
+	width: 90%;
+
+	font-family: Ubuntu;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 25px;
+	
+	align-items: center;
+	text-align: center;
+}
+
+.selected_background{
+	background-color:rgb(198, 198, 249);
+
+	font-family: Ubuntu;
+	font-style: normal;
+	font-size: 14px;
+	border-radius: 10px;
+}
+
+.no_selected_background{
+	background-color:rgb(255, 255, 255);
+
+	font-family: Ubuntu;
+	font-style: normal;
+	font-size: 14px;
+	border-radius: 10px;
+}
+
+.error_style{
+	position: absolute;
+	display: block;
+	top: 480px;
+	margin: 10px;
+	margin-left: 30px;
+	font-size: 15px;
+    font-weight: bold;
+	font-family: 'Ubuntu', sans-serif;
+	color: red;
+}
+
+.return_button{
+	--background: #f5a06f;
+	position: absolute;
+	top: 550px;
+	left: 20px;
+}
+
+.next_button{
+	position: absolute; 
+	width: 14%; 
+	top: 86%; 
+	left: 75%;
+}
+
+.rule_randomizing_options{
+	position: relative;
+	top: 210px;
+	left: 15px;
+	width: 90%;
+
+	font-family: Ubuntu;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 25px;
+	
+	align-items: center;
+	text-align: center;
+}
+
+.randomizing_option{
+	font-family: Ubuntu;
+	font-style: normal;
+	font-size: 13px;
+}

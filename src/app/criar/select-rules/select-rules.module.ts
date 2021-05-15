@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { EditPageRoutingModule } from './edit-routing.module';
-
-import { EditPage } from './edit.page';
+import { SelectRulesPageRoutingModule } from './select-rules-routing.module';
+import { SelectRulesPage } from './select-rules.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
@@ -14,7 +11,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
+    SelectRulesPageRoutingModule,
+    ComponentsModule
   ],
-  declarations: [EditPage]
+  declarations: [SelectRulesPage]
 })
-export class EditPageModule {}
+export class SelectRulesPageModule {}

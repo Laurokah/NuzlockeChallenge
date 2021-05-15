@@ -15,50 +15,26 @@
 	<ion-item class="selectGame_options">
 		<ion-label class="selectGame_label">Escolha o jogo</ion-label>
 		<ion-select [(ngModel)]="selectedGame" multiple="false">
-			<ion-select-option value="Red">Red</ion-select-option>
-			<ion-select-option value="Blue">Blue</ion-select-option>
-			<ion-select-option value="Green">Green</ion-select-option>
-			<ion-select-option value="Yellow">Yellow</ion-select-option>
-			<ion-select-option value="Gold">Gold</ion-select-option>
-			<ion-select-option value="Silver">Silver</ion-select-option>
-			<ion-select-option value="Crystal">Crystal</ion-select-option>
-			<ion-select-option value="Ruby">Ruby</ion-select-option>
-			<ion-select-option value="Sapphire">Sapphire</ion-select-option>
-			<ion-select-option value="Emerald">Emerald</ion-select-option>
-			<ion-select-option value="Diamond">Diamond</ion-select-option>
-			<ion-select-option value="Pearl">Pearl</ion-select-option>
-			<ion-select-option value="Platinum">Platinum</ion-select-option>
-			<ion-select-option value="Black">Black</ion-select-option>
-			<ion-select-option value="White">White</ion-select-option>
-			<ion-select-option value="Black_2">Black 2</ion-select-option>
-			<ion-select-option value="White_2">White 2</ion-select-option>
-			<ion-select-option value="X">X</ion-select-option>
-			<ion-select-option value="Y">Y</ion-select-option>
-			<ion-select-option value="Sun">Sun</ion-select-option>
-			<ion-select-option value="Moon">Moon</ion-select-option>
-			<ion-select-option value="Ultra_Sun">Ultra Sun</ion-select-option>
-			<ion-select-option value="Ultra_Moon">Ultra Moon</ion-select-option>
-			<ion-select-option value="Sword">Sword</ion-select-option>
-			<ion-select-option value="Shield">Shield</ion-select-option>
-			<ion-select-option value="Fire_Red">Fire Red</ion-select-option>
-			<ion-select-option value="Leaf_Green">Leaf Green</ion-select-option>
-			<ion-select-option value="Heart_Gold">Heart Gold</ion-select-option>
-			<ion-select-option value="Soul_Silver">Soul Silver</ion-select-option>
-			<ion-select-option value="Omega_Ruby">Omega Ruby</ion-select-option>
-			<ion-select-option value="Alpha_Sapphire">Alpha Sapphire</ion-select-option>
-			<ion-select-option value="Brilliant_Diamond">Brilliant Diamond</ion-select-option>
-			<ion-select-option value="Shining_Pearl">Shining Pearl</ion-select-option>
+			<ion-select-option *ngFor="let game of games" [value]="game">{{game}}</ion-select-option>
 		</ion-select>
 	</ion-item>
 
-	<ion-button routerLink="/criar/captura" class="selectRules_button" expand="block" fill="clear" shape="round">
+	<ion-button 
+		(click)="resetInvalidFlag()"
+		routerLink="/criar/select-rules/captura" 
+		[class]="this.chosenRulesService.areAllRulesSelected() ? 'selectRules_button_selected' : 'selectRules_button_notSelected'"
+		expand="block" fill="clear" shape="round">
 		Escolha as regras
 	</ion-button>
-  
-  <ion-button class="return_button" routerLink="/home">
+
+	<ion-text *ngIf="this.invalid" class="error_style">
+		&nbsp;&nbsp;&nbsp;<br>{{ this.errorMessage }}
+	</ion-text>
+
+	<ion-button class="return_button" routerLink="/home">
 		Voltar
 		<ion-icon slot="start" name="arrow-back-circle-outline"></ion-icon>
 	</ion-button>
 
-	<ion-img (click)="notificateCreation()" routerLink="/nuzlocke/pokemon-manager" class="next_button" src="./assets/images/pokeball_button.png"></ion-img>
-</ion-content> 
+	<ion-img (click)="validateCreation()" class="next_button" src="./assets/images/pokeball_button.png"></ion-img>
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-content *ngIf="chosenCategory.name != 'Randomizações'; else randomizations" class="background" [fullscreen]="true">
+	
+	<ion-label class="rule_name_label">
+		{{chosenCategory.name}}
+	</ion-label>
+	<ion-label class="rule_description_label">
+		{{chosenCategory.description}}
+	</ion-label>
+	<ion-item (click)="registerOption(0)" class="rule_options">
+		<ion-text [class]="this.selectedOptionIndex == 0 ? 'selected_background' : 'no_selected_background'"
+			>{{chosenCategory.options[0]}}</ion-text>
+	</ion-item>
+	<ion-item (click)="registerOption(1)" class="rule_options">
+		<ion-text [class]="this.selectedOptionIndex == 1 ? 'selected_background' : 'no_selected_background'"
+			>{{chosenCategory.options[1]}}</ion-text>
+	</ion-item>
+	<ion-item (click)="registerOption(2)" class="rule_options">
+		<ion-text [class]="this.selectedOptionIndex == 2 ? 'selected_background' : 'no_selected_background'"
+			>{{chosenCategory.options[2]}}</ion-text>
+	</ion-item>
+
+	<ion-text *ngIf="this.invalid" class="error_style">
+		&nbsp;&nbsp;&nbsp;<br>{{ this.errorMessage }}
+	</ion-text>
+
+	<ion-button (click)="returnToPastPage()" class="return_button">
+		Voltar
+		<ion-icon slot="start" name="arrow-back-circle-outline"></ion-icon>
+	</ion-button>
+
+	<ion-img (click)="saveOption()" class="next_button" src="./assets/images/pokeball_button.png"></ion-img>
+</ion-content>
+
+<ng-template #randomizations>
+	<ion-content class="background" [fullscreen]="true">
+		<ion-label class="rule_name_label">
+			{{chosenCategory.name}}
+		</ion-label>
+		
+		<ion-item *ngFor="let option of chosenCategory.options" class="rule_randomizing_options">
+			<ion-label class="randomizing_option">
+				{{option.title}}
+			</ion-label>
+			<ion-toggle [(ngModel)]="option.selected" slot="end"></ion-toggle>
+		</ion-item>
+		<ion-button (click)="returnToPastPage()" class="return_button">
+			Voltar
+			<ion-icon slot="start" name="arrow-back-circle-outline"></ion-icon>
+		</ion-button>
+		
+		<ion-img (click)="saveOption()" class="next_button" src="./assets/images/pokeball_button.png"></ion-img>
+	</ion-content>
+</ng-template>

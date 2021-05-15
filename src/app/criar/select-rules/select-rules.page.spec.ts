@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { RandomizacoesPage } from './randomizacoes.page';
+import { SelectRulesPage } from './select-rules.page';
 
-describe('RandomizacoesPage', () => {
-  let component: RandomizacoesPage;
-  let fixture: ComponentFixture<RandomizacoesPage>;
+describe('SelectRulesPage', () => {
+  let component: SelectRulesPage;
+  let fixture: ComponentFixture<SelectRulesPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ RandomizacoesPage ],
+      declarations: [ SelectRulesPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RandomizacoesPage);
+    fixture = TestBed.createComponent(SelectRulesPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

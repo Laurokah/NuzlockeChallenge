@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { GinasiosPage } from './ginasios.page';
+import { RulesToSelectComponent } from './rules-to-select.component';
 
-describe('GinasiosPage', () => {
-  let component: GinasiosPage;
-  let fixture: ComponentFixture<GinasiosPage>;
+describe('RulesToSelectComponent', () => {
+  let component: RulesToSelectComponent;
+  let fixture: ComponentFixture<RulesToSelectComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GinasiosPage ],
+      declarations: [ RulesToSelectComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GinasiosPage);
+    fixture = TestBed.createComponent(RulesToSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

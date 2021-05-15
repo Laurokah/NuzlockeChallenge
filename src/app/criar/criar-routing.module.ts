@@ -8,30 +8,11 @@ const routes: Routes = [
 		path: '',
 		component: CriarPage
 	},
-  {
-    path: 'captura',
-    loadChildren: () => import('./captura/captura.module').then( m => m.CapturaPageModule)
-  },
-  {
-    path: 'ginasios',
-    loadChildren: () => import('./ginasios/ginasios.module').then( m => m.GinasiosPageModule)
-  },
-  {
-    path: 'mortes',
-    loadChildren: () => import('./mortes/mortes.module').then( m => m.MortesPageModule)
-  },
-  {
-    path: 'randomizacoes',
-    loadChildren: () => import('./randomizacoes/randomizacoes.module').then( m => m.RandomizacoesPageModule)
-  },
-  {
-    path: 'recaptura',
-    loadChildren: () => import('./recaptura/recaptura.module').then( m => m.RecapturaPageModule)
-  },
-  {
-    path: 'reviver',
-    loadChildren: () => import('./reviver/reviver.module').then( m => m.ReviverPageModule)
-  }
+	{
+		path: 'select-rules',
+		loadChildren: () => import('./select-rules/select-rules.module').then(m => m.SelectRulesPageModule)
+	}
+
 ];
 
 @NgModule({
