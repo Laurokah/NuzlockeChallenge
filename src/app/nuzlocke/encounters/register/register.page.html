@@ -34,4 +34,8 @@
 			<ion-icon slot="icon-only" name="save"></ion-icon>
 			&nbsp;&nbsp;SALVAR
 		</ion-button>
+		
+		<ion-text *ngIf="this.invalid" class="error_style">
+			&nbsp;&nbsp;&nbsp;<br>{{ this.errorMessage }}
+		</ion-text>
 </ion-content>
