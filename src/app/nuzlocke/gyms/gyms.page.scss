@@ -1,18 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
-.label_style{
-	font-family: 'Ubuntu', sans-serif;
-	font-style: normal;
-	font-weight: bold;
-	font-size: 16px;
-	line-height: 21px;
-	display: flex;
-	align-items: center;
-	text-align: center;
-
-	padding-right: 60px;
-}
-
 .pokemon-toolbar-theme{
     --background: #f37a36;
     --color: #000000;
@@ -25,4 +12,42 @@
 	font-size: 17px;
 	line-height: 20px;
 	text-align: left;
-} 
+}
+
+.next_gym_title{
+	font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 22px;
+	padding-left: 15px;
+}
+
+.label_style{
+	font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-size: 15px;
+	line-height: 17px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+
+.challenging_gym{
+	--background: rgb(15, 188, 64);
+	font-size: 12px;
+}
+
+.not_challenging_gym{
+	--background: rgb(200, 17, 17);
+	font-size: 12px;
+}
+
+.error_style{
+	margin: 10px;
+	display: flex;
+	font-size: 15px;
+    font-weight: bold;
+	font-family: 'Ubuntu', sans-serif;
+	color: red;
+}
