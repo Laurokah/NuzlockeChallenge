@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
+.pokemon-toolbar-theme{
+    --background: #f37a36;
+    --color: #000000;
+}
+
 .title_style{
 	font-family: 'Ubuntu', sans-serif;
 	font-style: normal;
@@ -25,7 +30,3 @@
 	line-height: 15px;
 }
 
-.pokemon-toolbar-theme{
-    --background: #f37a36;
-    --color: #000000;
-}
