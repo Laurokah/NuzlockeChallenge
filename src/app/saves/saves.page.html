@@ -11,33 +11,44 @@
 <ion-content>
 
 	<ion-list>
-		<ion-item *ngFor="let nuzlocke of nuzlockes" (click)="redirectToNuzlocke(nuzlocke.name)">
-			<ion-grid>
-				<ion-row>
-					<ion-col size="5">
-						<ion-text class="title_style">{{nuzlocke.name}}</ion-text>
-					</ion-col>
-					<ion-col size="7">
-						<ion-row>
-							<ion-col size="12">
-								<ion-text class="description_style">Pokémon {{nuzlocke.game}}</ion-text>
-							</ion-col>
-						</ion-row>
-						<ion-row>
-							<ion-col size="12">
-								<ion-text class="description_style">Ginásios completos: {{nuzlocke.gyms}}</ion-text>																	
-							</ion-col>
-						</ion-row>
-						<ion-row>
-							<ion-col size="12">
-								<ion-badge [style]="nuzlocke.completed? '--background: green': '--background: red' ">
-									<ion-icon [name]="nuzlocke.completed? 'checkmark': 'close'"></ion-icon>
-								</ion-badge>
-							</ion-col>
-						</ion-row>
-					</ion-col>
-				</ion-row>
-			</ion-grid>
-		</ion-item>
+		<ion-grid *ngFor="let nuzlocke of savedNuzlockesService.nuzlockes">
+			<ion-row>
+				<ion-col size="2">
+					<ion-button (click)="confirmDeleting(nuzlocke)" class="delete_button">
+						<ion-icon slot="icon-only" name="trash"></ion-icon>
+					</ion-button>
+				</ion-col>
+				<ion-col size="10" (click)="redirectToNuzlocke(nuzlocke)">
+					<ion-item>
+						<ion-grid>
+							<ion-row>
+								<ion-col size="5">
+									<ion-text class="title_style">{{nuzlocke.name}}</ion-text>
+								</ion-col>
+								<ion-col size="7">
+									<ion-row>
+										<ion-col size="12">
+											<ion-text class="description_style">Pokémon {{nuzlocke.game}}</ion-text>
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col size="12">
+											<ion-text class="description_style">Ginásios completos: {{nuzlocke.completedGyms}}</ion-text>																	
+										</ion-col>
+									</ion-row>
+									<ion-row>
+										<ion-col size="12">
+											<ion-badge [style]="nuzlocke.completed? '--background: green': '--background: red' ">
+												<ion-icon [name]="nuzlocke.completed? 'checkmark': 'close'"></ion-icon>
+											</ion-badge>
+										</ion-col>
+									</ion-row>
+								</ion-col>
+							</ion-row>
+						</ion-grid>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
 	</ion-list>
 </ion-content> 

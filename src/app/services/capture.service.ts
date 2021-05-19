@@ -83,7 +83,7 @@ export class CaptureService {
 		'Viridian Forest',
 	];
 
-	public routes = this.clone(1);
+	public routes = [];
 
 	public clone(gameGen){
 		let routesToCopy = [];

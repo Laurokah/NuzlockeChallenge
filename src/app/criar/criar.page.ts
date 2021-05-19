@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { CaptureService } from '../services/capture.service';
 import { ChosenRulesService } from '../services/chosen-rules.service';
+import { SavedNuzlockesService } from '../services/saved-nuzlockes.service';
 
 @Component({
 	selector: 'app-criar',
@@ -14,6 +16,8 @@ export class CriarPage implements OnInit {
 	constructor(
 		private alertCtrl: AlertController,
 		public chosenRulesService: ChosenRulesService,
+		public savedNuzlockesService: SavedNuzlockesService,
+		public captureService: CaptureService,
 		public router: Router
 	){}
 
@@ -77,9 +81,28 @@ export class CriarPage implements OnInit {
 			this.errorMessage = "Escolha as regras do seu Nuzlocke";
 		} else {
 			this.invalid = false;
-			this.notificateCreation();
+			this.createNuzlocke();
 			this.router.navigate(['/nuzlocke/pokemon-manager']);
 		}
+	}
+	public createNuzlocke(){
+		let generation = this.selectedGame == 'Red' ? 1 : 2;
+
+		let newNuzlocke = {
+			name: this.newNuzlockeName,
+			game: this.selectedGame,
+			rules: this.chosenRulesService.returnChosenRules(),
+			completed: false,
+			completedGyms: 0,
+			ownedPokemon: [],
+			routes: this.captureService.clone(generation),
+			revivingChances: 0
+		};
+		this.savedNuzlockesService.nuzlockes.push(newNuzlocke);
+
+		this.savedNuzlockesService.loadNuzlocke(newNuzlocke);
+
+		this.notificateCreation();
 	}
 
   public async notificateCreation() {

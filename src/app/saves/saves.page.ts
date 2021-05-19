@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { SavedNuzlockesService } from '../services/saved-nuzlockes.service';
 
 @Component({
 	selector: 'app-saves',
@@ -8,37 +10,41 @@ import { Router } from '@angular/router';
 })
 export class SavesPage implements OnInit {
 
-	constructor(public router: Router) { }
+	constructor(
+		public router: Router,
+		public savedNuzlockesService: SavedNuzlockesService,
+		public alertController: AlertController
+	) { }
 
 	ngOnInit() {
 	}
 
-	public nuzlockes = [
-		{
-			name: 'Nuzlocke da Quarentena',
-			game: 'Red',
-			completed: false,
-			gyms: 0
-		},
-		{
-			name: 'Mono Flying',
-			game: 'Black 2',
-			completed: true,
-			gyms: 8
-		},
-		{
-			name: 'Hell on Earth',
-			game: 'Brilliant Diamond',
-			completed: false,
-			gyms: 2
-		}
-	];
-
-	public redirectToNuzlocke(nuzlockeName: string){
-		if(nuzlockeName == 'Nuzlocke da Quarentena'){
-			this.router.navigate(['/nuzlocke/pokemon-manager']);
-		}
-
+	public redirectToNuzlocke(nuzlocke){
+		this.savedNuzlockesService.loadNuzlocke(nuzlocke);
+		this.router.navigate(['/nuzlocke/pokemon-manager']);
 	}
 
+	public deleteNuzlocke(nuzlocke){
+		this.savedNuzlockesService.nuzlockes.splice(
+			this.savedNuzlockesService.nuzlockes.indexOf(nuzlocke), 1);
+	}
+
+
+	public async confirmDeleting(nuzlocke) {
+		const alert = await this.alertController.create({
+			header: 'Atenção!',
+			message: 'Você deseja mesmo deletar esse Nuzlocke? Essa operação não pode ser desfeita',
+			buttons: [
+				{
+					text: 'Sim',
+					handler: () => this.deleteNuzlocke(nuzlocke)
+				},
+				'Não'
+			]
+		});
+		alert.present();
+	}
 }
+
+	
+

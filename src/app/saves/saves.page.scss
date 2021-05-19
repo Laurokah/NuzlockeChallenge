@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
+.pokemon-toolbar-theme{
+    --background: #f37a36;
+    --color: #000000;
+}
+
 .label_style{
 	font-family: 'Ubuntu', sans-serif;
 	font-style: normal;
@@ -10,9 +15,10 @@
 	align-items: center;
 }
 
-.pokemon-toolbar-theme{
-    --background: #f37a36;
-    --color: #000000;
+.delete_button{
+	--background: rgb(240, 189, 34);
+	--color: black;
+	width: 50px;
 }
 
 .title_style{

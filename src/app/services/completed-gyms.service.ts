@@ -81,6 +81,12 @@ export class CompletedGymsService {
 			completed: false
 		}
 	];
+	
+	public resetGyms(){
+		for (const badge of this.badges){
+			badge.iconSource = badge.uncheckedIcon;
+		}
+	}
 
 	public nextBadge = this.badges[0];
 	public lastCompletedBadgeNumber = 0;
