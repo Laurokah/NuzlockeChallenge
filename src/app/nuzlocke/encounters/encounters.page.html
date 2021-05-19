@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-toolbar class="pokemon-toolbar-theme">
-		<ion-title class="title_style">Nuzlocke da quarentena</ion-title>
+		<ion-title class="title_style">{{savedNuzlockesService.currentNuzlocke.name}}</ion-title>
 		<ion-buttons slot="start" icon="add">
 			<ion-menu-button menu="main-menu"></ion-menu-button>
 		</ion-buttons>
@@ -14,7 +14,7 @@
 				<ion-row (click)="route.waiting? registerEncounter(captureService.routes.indexOf(route)): makeNothing()">
 					<ion-col size="4">
 						<ion-icon [name]="route.iconName"></ion-icon>&nbsp;&nbsp;
-						<ion-text  class="label_style">{{ route.name }}</ion-text>				
+						<ion-text  class="label_style">{{ route.name }}</ion-text>
 					</ion-col>
 					<ion-col size="8">
 						<ion-item *ngIf="route.successful && route.species != null">
@@ -23,7 +23,7 @@
 								<br>({{ route.nickname }})
 								<br>Level: {{ route.level }}
 							</ion-label>
-							
+
 							<ng-template #noNickname>
 								<ion-label class="pokemon_detail_style">{{ route.species }}
 									<br>Level: {{ route.level }}

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AlertController} from '@ionic/angular';
 import { CaptureService } from 'src/app/services/capture.service';
 import { ChosenRulesService } from 'src/app/services/chosen-rules.service';
+import { SavedNuzlockesService } from 'src/app/services/saved-nuzlockes.service';
+
 @Component({
 	selector: 'app-encounters',
 	templateUrl: './encounters.page.html',
@@ -14,7 +16,8 @@ export class EncountersPage implements OnInit {
 		private alertCtrl: AlertController,
 		private router: Router,
 		public captureService: CaptureService,
-		public chosenRulesService: ChosenRulesService
+		public chosenRulesService: ChosenRulesService,
+		public savedNuzlockesService: SavedNuzlockesService
 	){}
 
 	ngOnInit() {
@@ -23,7 +26,7 @@ export class EncountersPage implements OnInit {
 	public makeNothing(){}
 
 	public registerEncounter(routeIndex: number){
-		if(	
+		if(
 			routeIndex != 0 &&
 			this.chosenRulesService.chosenRecaptureRule.description == "O encontro na rota é considerado perdido"
 		){

@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-toolbar class="pokemon-toolbar-theme">
-		<ion-title class="title_style">Nuzlocke da quarentena</ion-title>
+		<ion-title class="title_style">{{savedNuzlockesService.currentNuzlocke.name}}</ion-title>
 		<ion-buttons slot="start" icon="add">
 			<ion-menu-button menu="main-menu"></ion-menu-button>
 		</ion-buttons>
@@ -16,7 +16,7 @@
 					<ion-label class="label_style">JOGO</ion-label>
 				</ion-col>
 				<ion-col size="7">
-					<ion-text class="text_style">Pokémon Black
+					<ion-text class="text_style">Pokémon {{savedNuzlockesService.currentNuzlocke.game}}
 					</ion-text>
 				</ion-col>
 			</ion-row>
@@ -37,5 +37,5 @@
 			</ion-row>
 		</ion-grid>
 	</ion-item>
-	
+
 </ion-content>

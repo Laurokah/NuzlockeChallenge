@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { ChosenRulesService } from '../services/chosen-rules.service';
+import { SavedNuzlockesService } from '../services/saved-nuzlockes.service';
 
 @Component({
 	selector: 'app-nuzlocke',
@@ -9,7 +11,12 @@ import { AlertController } from '@ionic/angular';
 })
 export class NuzlockePage implements OnInit {
 
-  constructor(private alertCtrl: AlertController, private router: Router) { }
+	constructor(
+		private alertCtrl: AlertController,
+		private router: Router,
+		public savedNuzlockesService: SavedNuzlockesService,
+		public chosenRulesService: ChosenRulesService
+	) {}
 
 	ngOnInit() {
 	}
@@ -21,14 +28,14 @@ export class NuzlockePage implements OnInit {
 			buttons: [
 				{
 					text: 'Sim',
-					handler: () => this.redirectToHome()
+					handler: () => this.returnToHome()
 				},
 				'Não'
 			]
 		});
 		alert.present();
 	}
-	public redirectToHome(){
-		this.router.navigate(['/home']);
+	public returnToHome(){
+		this.chosenRulesService.resetRules();
 	}
 }

@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-toolbar class="pokemon-toolbar-theme">
-		<ion-title class="title_style">Nuzlocke da quarentena</ion-title>
+		<ion-title class="title_style">{{savedNuzlockesService.currentNuzlocke.name}}</ion-title>
 		<ion-buttons slot="start" icon="add">
 			<ion-menu-button menu="main-menu"></ion-menu-button>
 		</ion-buttons>
@@ -35,7 +35,7 @@
 			Pokémon mais forte: Level {{this.completedGymsService.nextBadge.greatestLevel}}
 		</ion-label>
 	</ion-item>
-	<ion-button 
+	<ion-button
 	*ngIf="this.completedGymsService.lastCompletedBadgeNumber != 8 && doesChosenRuleAffectMinimumLevels()"
 	(click)="changeChallengingStatus()"
 	[class]="challengingGym ? 'challenging_gym' : 'not_challenging_gym'">

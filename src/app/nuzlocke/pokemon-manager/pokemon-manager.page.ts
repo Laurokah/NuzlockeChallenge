@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChosenRulesService } from 'src/app/services/chosen-rules.service';
 import { OwnedPokemonService } from 'src/app/services/owned-pokemon.service';
+import { SavedNuzlockesService } from 'src/app/services/saved-nuzlockes.service';
 
 @Component({
 	selector: 'app-pokemon-manager',
@@ -13,13 +14,14 @@ export class PokemonManagerPage implements OnInit {
 	constructor(
 		public router: Router,
 		public ownedPokemonService: OwnedPokemonService,
-		public chosenRulesService: ChosenRulesService
+		public chosenRulesService: ChosenRulesService,
+		public savedNuzlockesService: SavedNuzlockesService
 	){}
 
 	ngOnInit() {
 	}
 
-	
+
 
 	public currentStatus = "Party";
 

@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-toolbar class="pokemon-toolbar-theme">
-		<ion-title class="title_style">Nuzlocke da quarentena</ion-title>
+		<ion-title class="title_style">{{savedNuzlockesService.currentNuzlocke.name}}</ion-title>
 		<ion-buttons slot="start" icon="add">
 			<ion-menu-button menu="main-menu"></ion-menu-button>
 		</ion-buttons>
@@ -26,7 +26,7 @@
 				<br>({{ owned.nickname }})</ion-label>
 			<ion-text class="pokemon_description">Level: {{ owned.level }}</ion-text>
 
-			
+
 			<ng-template #noNickname>
 				<ion-label class="pokemon_description">{{ owned.pokemon.species }}</ion-label>
 			</ng-template>
