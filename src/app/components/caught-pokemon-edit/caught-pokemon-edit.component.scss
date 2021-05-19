@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+.label_species_style{
+	font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 13px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	padding-top: 20px;
+
+}
+
+.label_nickname_style{
+	font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-size: 16px;
+	line-height: 13px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+
+.level_label_style{
+    font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 13px;
+}
+
+.level_label_style_number{
+    font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-size: 16px;
+	line-height: 13px;
+}
+
+.levelUp_button{
+	--background: #f5a06f;
+	color: rgb(255, 255, 255);
+}
+
+.evolve_button{
+	--background: #f5a06f;
+	color: black;
+}
+
+.dna_img{
+	width: 20px;
+}
+
+.label_style{
+	font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 13px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+}

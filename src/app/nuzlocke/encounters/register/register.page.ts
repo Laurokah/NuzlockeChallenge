@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CaptureService } from 'src/app/services/capture.service';
+import { OwnedPokemonService } from 'src/app/services/owned-pokemon.service';
 import { PokemonDatabaseService } from 'src/app/services/pokemon-database.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class RegisterPage implements OnInit {
 	constructor(
 		public router: Router,
 		private captureService: CaptureService,
-		public pokemonDatabaseService: PokemonDatabaseService
+		public pokemonDatabaseService: PokemonDatabaseService,
+		public ownedPokemonService: OwnedPokemonService
 	) {}
 
 	ngOnInit() {

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { OwnedPokemonService } from './owned-pokemon.service';
 import { PokemonDatabaseService } from './pokemon-database.service';
 
 @Injectable({
@@ -7,6 +8,7 @@ import { PokemonDatabaseService } from './pokemon-database.service';
 export class CaptureService {
 
 	constructor(
+		public ownedPokemonService: OwnedPokemonService,
 		public pokemonDatabaseService: PokemonDatabaseService
 	){}
 
@@ -104,6 +106,20 @@ export class CaptureService {
 
 	public registerPokemon(savedPokemon){
 		this.changeEncounterStatus(this.routeIndex, true)
+		let partyLength = this.ownedPokemonService.allPokemon.filter(
+			owned => owned.status == 'Party'
+		).length;
+
+		if(partyLength < 6){
+			savedPokemon.status = 'Party';
+		} else {
+			savedPokemon.status = 'Box';
+		}
+
+		savedPokemon.url = 
+			"edit/PKMN-" + (this.ownedPokemonService.allPokemon.length + 1);
+
+		this.ownedPokemonService.allPokemon.push(savedPokemon);
 
 		this.currentRoute.level = savedPokemon.level;
 		this.currentRoute.nickname = savedPokemon.nickname;
