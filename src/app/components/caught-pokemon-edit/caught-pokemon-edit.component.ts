@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { ChosenRulesService } from 'src/app/services/chosen-rules.service';
 import { OwnedPokemonService } from 'src/app/services/owned-pokemon.service';
 import { PokemonDatabaseService } from 'src/app/services/pokemon-database.service';
+import { SavedNuzlockesService } from 'src/app/services/saved-nuzlockes.service';
 
 @Component({
 	selector: 'app-caught-pokemon-edit',
@@ -22,7 +23,8 @@ export class CaughtPokemonEditComponent implements OnInit {
 		private alertCtrl: AlertController,
 		public pokemonDatabaseService: PokemonDatabaseService,
 		public ownedPokemonService: OwnedPokemonService,
-		public chosenRulesService: ChosenRulesService
+		public chosenRulesService: ChosenRulesService,
+		public savedNuzlockesService: SavedNuzlockesService
 	){
 
 	}
@@ -33,7 +35,7 @@ export class CaughtPokemonEditComponent implements OnInit {
 	}
 
 	public levelUp() {
-		if(this.pokemon_chosen.level < 100){		
+		if(this.pokemon_chosen.level < 100){
 			this.pokemon_chosen.level++;
 		}
 	}
@@ -59,7 +61,7 @@ export class CaughtPokemonEditComponent implements OnInit {
 		let oldStatus = this.currentPokemonStatus;
 
 		const alert = await this.alertCtrl.create({
-			message: 'Deseja mesmo transferir esse Pokémon de "' + 
+			message: 'Deseja mesmo transferir esse Pokémon de "' +
 						oldStatus + '" para "' +
 						newStatus + '"?',
 			buttons: [
@@ -114,7 +116,7 @@ export class CaughtPokemonEditComponent implements OnInit {
 			pokemon => pokemon.id == idToEvolve
 		);
 	}
-	
+
 	public async chooseEvolution(evolveToIds){
 		let evolutions = [];
 		for (const pokemonId of evolveToIds){
@@ -127,7 +129,7 @@ export class CaughtPokemonEditComponent implements OnInit {
 					text: pokemon.species,
 					handler: () => this.evolveToId(pokemonId)
 				}
-			);		
+			);
 		}
 		evolutions.push("Voltar");
 
@@ -137,7 +139,7 @@ export class CaughtPokemonEditComponent implements OnInit {
 		});
 		alert.present();
 	}
-	
+
 	public isChangeInvalid(newStatus, oldStatus){
 		let partySize = this.ownedPokemonService.allPokemon.filter(
 			owned => owned.status == "Party"
@@ -152,12 +154,36 @@ export class CaughtPokemonEditComponent implements OnInit {
 								"Pokémon de outros status antes de prosseguir"
 			return true;
 		} else if(
-			newStatus == "Party" && 
-			partySize == 6
+			oldStatus == "Morto" &&
+			newStatus != "Morto"
 		){
-			this.errorMessage = "A Party já está cheia. Retire dela o Pokémon que " +
-								"você deseja substituir antes de prosseguir";
-			return true;
+			if(this.chosenRulesService.chosenRevivalRule.description == "Um Pokémon morto não pode mais ser revivido"){
+				this.errorMessage = "Você não pode reviver nenhum Pokémon";
+				return true;
+			} else if(
+				this.chosenRulesService.chosenRevivalRule.description != "Um Pokémon morto não pode mais ser revivido" &&
+				this.savedNuzlockesService.currentNuzlocke.revivingChances == 0
+			){
+				this.errorMessage = "Você não tem chances disponíveis para reviver os Pokémon";
+				return true;
+			} else if(
+				newStatus == "Party" &&
+				partySize == 6
+			){
+				this.errorMessage = "A Party já está cheia. Retire dela o Pokémon que " +
+									"você deseja substituir antes de prosseguir";
+				return true;
+			}
+			this.savedNuzlockesService.currentNuzlocke.revivingChances--;
+			} else {
+			if(
+				newStatus == "Party" &&
+				partySize == 6
+			){
+				this.errorMessage = "A Party já está cheia. Retire dela o Pokémon que " +
+									"você deseja substituir antes de prosseguir";
+				return true;
+			}
 		}
 		return false;
 	}

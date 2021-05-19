@@ -28,4 +28,16 @@ export class PokemonManagerPage implements OnInit {
 	public redirectToOwnedUrl(url){
 		this.router.navigate(['/nuzlocke/pokemon-manager/' + url]);
 	}
+	public doesRevivalRuleAllowReviving(){
+		return 	this.chosenRulesService.chosenRevivalRule.description == 'Caso o jogador adquira um Revive durante o jogo (sem ser por compra), ele pode reviver um dos Pokémon que estiverem mortos' ||
+				this.chosenRulesService.chosenRevivalRule.description == 'A cada ginásio vencido, o jogador pode reviver um dos Pokémon mortos';
+	}
+
+	public isRevivalRuleBasedOnItem(){
+		return 	this.chosenRulesService.chosenRevivalRule.description == 'Caso o jogador adquira um Revive durante o jogo (sem ser por compra), ele pode reviver um dos Pokémon que estiverem mortos';
+	}
+
+	public addRevivalChance(){
+		this.savedNuzlockesService.currentNuzlocke.revivingChances++;
+	}
 }

@@ -42,6 +42,26 @@
 	text-align: center;
 }
 
+.revive_img{
+	width: 25px;
+}
+
+.reviving_chances_style{
+	font-family: 'Ubuntu', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 21px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	margin-left: 10px;
+}
+
+.add_revive_button{
+	--background: #f5a06f;
+}
+
 .pokemon_description{
 	font-family: 'Ubuntu', sans-serif;
 	font-style: normal;

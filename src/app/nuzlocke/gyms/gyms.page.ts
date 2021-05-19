@@ -128,7 +128,12 @@ export class GymsPage implements OnInit {
 			badge => badge.number == this.completedGymsService.lastCompletedBadgeNumber + 1
 		);
 
+		if(this.chosenRulesService.chosenRevivalRule.description == "A cada ginásio vencido, o jogador pode reviver um dos Pokémon mortos"){
+			this.savedNuzlockesService.currentNuzlocke.revivingChances++;
+		}
+
 		this.challengingGym = false;
 		this.challengingGymMessage = "Estou pronto para desafiar o ginásio";
+		this.savedNuzlockesService.currentNuzlocke.completedGyms++;
 	}
 }
