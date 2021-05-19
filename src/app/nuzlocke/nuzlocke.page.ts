@@ -21,20 +21,26 @@ export class NuzlockePage implements OnInit {
 	ngOnInit() {
 	}
 
-	public async endNuzlocke() {
+	public async confirmEnding() {
 		const alert = await this.alertCtrl.create({
 			header: 'Finalizar Nuzlocke!',
 			message: 'Você deseja finalizar esse Nuzlocke?',
 			buttons: [
 				{
 					text: 'Sim',
-					handler: () => this.returnToHome()
+					handler: () => this.endNuzlocke()
 				},
 				'Não'
 			]
 		});
 		alert.present();
 	}
+
+	public endNuzlocke(){
+		this.savedNuzlockesService.currentNuzlocke.completed = true;
+		this.returnToHome();
+	}
+
 	public returnToHome(){
 		this.chosenRulesService.resetRules();
 	}

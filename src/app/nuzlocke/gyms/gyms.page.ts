@@ -30,7 +30,8 @@ export class GymsPage implements OnInit {
 	public selectedBadgeNumber = 0;
 
 	public shouldGymOptionsAppear(){
-		return 	this.completedGymsService.lastCompletedBadgeNumber != 8;
+		return 	this.completedGymsService.lastCompletedBadgeNumber != 8 &&
+		!this.savedNuzlockesService.currentNuzlocke.completed;
 	}
 
 	public doesChosenRuleAffectMinimumLevels(){
@@ -82,16 +83,18 @@ export class GymsPage implements OnInit {
 	}
 
 	public shouldGymBeMarked(badgeNumber: number){
-		this.selectedBadgeNumber = badgeNumber;
-		if(!this.challengingGym && this.doesChosenRuleAffectMinimumLevels()){
-			this.errorMessage = "Antes de marcar um ginásio como concluído, você deve pressionar o botão acima para validar as condições do desafio";
-			this.invalid = true;
-		} else if(this.isPartyEmpty()){
-			this.errorMessage = 'Você está sem Pokémon! Registre ao menos o seu inicial antes de batalhar no ginásio';
-			this.invalid = true;
-		} else if(this.selectedBadgeNumber == this.completedGymsService.lastCompletedBadgeNumber + 1){
-			this.invalid = false;
-			this.confirmGymCompletion();
+		if(!this.savedNuzlockesService.currentNuzlocke.completed){
+			this.selectedBadgeNumber = badgeNumber;
+			if(!this.challengingGym && this.doesChosenRuleAffectMinimumLevels()){
+				this.errorMessage = "Antes de marcar um ginásio como concluído, você deve pressionar o botão acima para validar as condições do desafio";
+				this.invalid = true;
+			} else if(this.isPartyEmpty()){
+				this.errorMessage = 'Você está sem Pokémon! Registre ao menos o seu inicial antes de batalhar no ginásio';
+				this.invalid = true;
+			} else if(this.selectedBadgeNumber == this.completedGymsService.lastCompletedBadgeNumber + 1){
+				this.invalid = false;
+				this.confirmGymCompletion();
+			}
 		}
 	}
 

@@ -26,13 +26,15 @@ export class EncountersPage implements OnInit {
 	public makeNothing(){}
 
 	public registerEncounter(routeIndex: number){
-		if(
-			routeIndex != 0 &&
-			this.chosenRulesService.chosenRecaptureRule.description == "O encontro na rota é considerado perdido"
-		){
-			this.hasEncounterFailed(routeIndex);
-		} else {
-			this.registerSuccess(true, routeIndex);
+		if(!this.savedNuzlockesService.currentNuzlocke.completed){
+			if(
+				routeIndex != 0 &&
+				this.chosenRulesService.chosenRecaptureRule.description == "O encontro na rota é considerado perdido"
+			){
+				this.hasEncounterFailed(routeIndex);
+			} else {
+				this.registerSuccess(true, routeIndex);
+			}
 	}
 }
 

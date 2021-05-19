@@ -38,7 +38,9 @@ export class PokemonManagerPage implements OnInit {
 	}
 
 	public redirectToOwnedUrl(url){
-		this.router.navigate(['/nuzlocke/pokemon-manager/' + url]);
+		if(!this.savedNuzlockesService.currentNuzlocke.completed){
+			this.router.navigate(['/nuzlocke/pokemon-manager/' + url]);
+		}
 	}
 	public doesRevivalRuleAllowReviving(){
 		return 	this.chosenRulesService.chosenRevivalRule.description == 'Caso o jogador adquira um Revive durante o jogo (sem ser por compra), ele pode reviver um dos Pokémon que estiverem mortos' ||

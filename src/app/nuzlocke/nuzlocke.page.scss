@@ -1,15 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
-.pokemon-tab-theme{
-    // background-color: #f37a36;
-    --background: #f37a36;
-    --color: #000000;
-}
-
-.tab-icon{
-    width: 25px;
-}
-
 .background_menu_toolbar{
     --background: #f37a36;
 }
@@ -32,34 +22,18 @@
 	text-align: center;
 }
 
+.pokemon-tab-theme{
+    --background: #f37a36;
+    --color: #000000;
+}
+
+
+.tab-icon{
+    width: 25px;
+}
+
 .tab_font{
 	font-family: 'Ubuntu', sans-serif;
 	font-size: 12px;
 	text-align: center;
 }
-
-
-.title_style{
-	font-family: 'Ubuntu', sans-serif;
-	font-style: normal;
-	font-weight: bold;
-	font-size: 17px;
-	line-height: 20px;
-	text-align: left;
-}
-
-.label_style{
-	font-family: 'Ubuntu', sans-serif;
-	font-style: normal;
-	font-weight: bold;
-	font-size: 16px;
-	line-height: 21px;
-	display: flex;
-	align-items: center;
-	text-align: center;
-}
-
-.pokemon-toolbar-theme{
-    --background: #f37a36;
-    --color: #000000;
-} 

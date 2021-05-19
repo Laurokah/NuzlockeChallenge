@@ -36,7 +36,7 @@
 		</ion-label>
 	</ion-item>
 	<ion-button
-	*ngIf="this.completedGymsService.lastCompletedBadgeNumber != 8 && doesChosenRuleAffectMinimumLevels()"
+	*ngIf="this.completedGymsService.lastCompletedBadgeNumber != 8 && !this.savedNuzlockesService.currentNuzlocke.completed && doesChosenRuleAffectMinimumLevels()"
 	(click)="changeChallengingStatus()"
 	[class]="challengingGym ? 'challenging_gym' : 'not_challenging_gym'">
 		{{this.challengingGymMessage}}
