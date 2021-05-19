@@ -85,9 +85,16 @@ export class CaughtPokemonEditComponent implements OnInit {
 	public changePokemonStatus(newStatus, oldStatus, doChange){
 		this.hasDismissed = false;
 		if(doChange){
-			this.pokemon_chosen.status = newStatus;
+			if(this.isChangeInvalid(newStatus, oldStatus)){
+				this.invalid = true;
+				this.pokemon_chosen.status = oldStatus;
+			} else {
+				this.invalid = false;
+				this.pokemon_chosen.status = newStatus;
+			}
 			this.currentPokemonStatus = this.pokemon_chosen.status;
 		} else {
+			this.invalid = false;
 			this.pokemon_chosen.status = oldStatus;
 		}
 		this.hasDismissed = true;
@@ -129,5 +136,29 @@ export class CaughtPokemonEditComponent implements OnInit {
 			buttons: evolutions
 		});
 		alert.present();
+	}
+	
+	public isChangeInvalid(newStatus, oldStatus){
+		let partySize = this.ownedPokemonService.allPokemon.filter(
+			owned => owned.status == "Party"
+		).length;
+
+		if(
+			oldStatus == "Party" &&
+			partySize == 1 &&
+			newStatus != "Party"
+		){
+			this.errorMessage = "A Party não pode ficar vazia. Transfira à ela algum " +
+								"Pokémon de outros status antes de prosseguir"
+			return true;
+		} else if(
+			newStatus == "Party" && 
+			partySize == 6
+		){
+			this.errorMessage = "A Party já está cheia. Retire dela o Pokémon que " +
+								"você deseja substituir antes de prosseguir";
+			return true;
+		}
+		return false;
 	}
 }

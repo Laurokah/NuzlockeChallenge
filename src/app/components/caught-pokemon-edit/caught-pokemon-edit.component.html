@@ -56,4 +56,7 @@
 			</ion-row>
 		</ion-grid>
 	</ion-item>
+	<ion-text *ngIf="this.invalid" class="error_style">
+		&nbsp;&nbsp;&nbsp;<br>{{ this.errorMessage }}
+	</ion-text>
 </ion-content>
