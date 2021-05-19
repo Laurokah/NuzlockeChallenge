@@ -123,4 +123,13 @@ export class ChosenRulesService {
 			this.chosenRandomizationRule
 		];
 	}
-} 
+
+	public resetRules(){
+		this.chosenCaptureRule = null;
+		this.chosenRecaptureRule = null;
+		this.chosenDeathRule = null;
+		this.chosenRevivalRule = null;
+		this.chosenGymsRule = null;
+		this.chosenRandomizationRule = null;
+	}
+}

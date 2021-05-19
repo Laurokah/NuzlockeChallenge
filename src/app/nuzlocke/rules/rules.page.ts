@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChosenRulesService } from 'src/app/services/chosen-rules.service';
+import { SavedNuzlockesService } from 'src/app/services/saved-nuzlockes.service';
 
 @Component({
 	selector: 'app-rules',
@@ -7,36 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RulesPage implements OnInit {
 
-	constructor() { }
+	constructor(
+		public chosenRulesService: ChosenRulesService,
+		public savedNuzlockesService: SavedNuzlockesService
+	) { }
 
 	ngOnInit() {
 	}
-	
-	public rules = [
-		{
-			title: 'Captura',
-			description: 'Capturar obrigatoriamente o segundo Pokémon que aparecer'
-		},
-		{
-			title: 'Recaptura',
-			description: 'O encontro na rota é considerado perdido'
-		},
-		{
-			title: 'Morte',
-			description: 'Se desmaiar apenas em batalhas contra treinadores'
-		},
-		{
-			title: 'Reviver',
-			description: 'A cada ginásio vencido, o jogador pode reviver um dos Pokémon mortos'
-		},
-		{
-			title: 'Ginásios',
-			description: 'Os Pokémon devem estar a 2 níveis abaixo do Pokémon mais forte do líder'
-		},
-		{
-			title: 'Randomização',
-			description: 'Apenas Pokémon randomizados'
-		}
-	]
 
+	public rules = [
+		this.chosenRulesService.chosenCaptureRule,
+		this.chosenRulesService.chosenRecaptureRule,
+		this.chosenRulesService.chosenDeathRule,
+		this.chosenRulesService.chosenRevivalRule,
+		this.chosenRulesService.chosenGymsRule,
+		this.chosenRulesService.chosenRandomizationRule
+	];
 }
