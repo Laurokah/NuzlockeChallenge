@@ -115,7 +115,7 @@ export class CaptureService {
 		} else {
 			savedPokemon.status = 'Box';
 		}
-
+		
 		savedPokemon.url = 
 			"edit/PKMN-" + (this.ownedPokemonService.allPokemon.length + 1);
 
@@ -125,6 +125,8 @@ export class CaptureService {
 		this.currentRoute.nickname = savedPokemon.nickname;
 		this.currentRoute.species = savedPokemon.pokemon.species;
 		this.currentRoute.iconSource = savedPokemon.pokemon.iconSource;
+
+		this.ownedPokemonService.applyStatusFilterNoStatus();
 	}
 
 	public changeEncounterStatus(routeIndex: number, successful: boolean) {

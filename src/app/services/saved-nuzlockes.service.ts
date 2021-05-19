@@ -3,6 +3,7 @@ import { ChosenRulesService } from './chosen-rules.service';
 import { OwnedPokemonService } from './owned-pokemon.service';
 import { CaptureService } from './capture.service';
 import { CompletedGymsService } from './completed-gyms.service';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
 	providedIn: 'root'
@@ -13,7 +14,8 @@ export class SavedNuzlockesService {
 		public ownedPokemonService: OwnedPokemonService,
 		public chosenRulesService: ChosenRulesService,
 		public captureService: CaptureService,
-		public completedGymsService: CompletedGymsService
+		public completedGymsService: CompletedGymsService,
+		public storage: Storage
 	){}
 
 	public nuzlockes = [];
@@ -46,4 +48,8 @@ export class SavedNuzlockesService {
 		this.completedGymsService.nextBadge = this.completedGymsService.badges[this.currentNuzlocke.completedGyms]
 		this.completedGymsService.lastCompletedBadgeNumber = this.currentNuzlocke.completedGyms;
 	}
-} 
+
+	public updateDatabase(){
+		this.storage.set('nuzlockes', this.nuzlockes);
+	}
+}

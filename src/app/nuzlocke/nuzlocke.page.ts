@@ -12,7 +12,7 @@ import { SavedNuzlockesService } from '../services/saved-nuzlockes.service';
 export class NuzlockePage implements OnInit {
 
 	constructor(
-		private alertCtrl: AlertController,
+		private alertCtrl: AlertController, 
 		private router: Router,
 		public savedNuzlockesService: SavedNuzlockesService,
 		public chosenRulesService: ChosenRulesService
@@ -38,10 +38,12 @@ export class NuzlockePage implements OnInit {
 
 	public endNuzlocke(){
 		this.savedNuzlockesService.currentNuzlocke.completed = true;
+		this.savedNuzlockesService.updateDatabase();
 		this.returnToHome();
 	}
 
 	public returnToHome(){
 		this.chosenRulesService.resetRules();
+		this.router.navigate(['/home']);
 	}
 }

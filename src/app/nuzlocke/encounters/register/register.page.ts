@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 import { CaptureService } from 'src/app/services/capture.service';
 import { OwnedPokemonService } from 'src/app/services/owned-pokemon.service';
 import { PokemonDatabaseService } from 'src/app/services/pokemon-database.service';
@@ -17,7 +18,8 @@ export class RegisterPage implements OnInit {
 		private captureService: CaptureService,
 		public pokemonDatabaseService: PokemonDatabaseService,
 		public ownedPokemonService: OwnedPokemonService,
-		public savedNuzlockesService: SavedNuzlockesService
+		public savedNuzlockesService: SavedNuzlockesService,
+		public storage: Storage
 	) {}
 
 	ngOnInit() {
@@ -43,6 +45,7 @@ export class RegisterPage implements OnInit {
 			this.captureService.registerPokemon(savedPokemon);
 
 			this.savedNuzlockesService.currentNuzlocke.ownedPokemon = this.ownedPokemonService.allPokemon;
+			this.savedNuzlockesService.updateDatabase();
 
 			this.router.navigate(['/nuzlocke/encounters']);
 		} else {

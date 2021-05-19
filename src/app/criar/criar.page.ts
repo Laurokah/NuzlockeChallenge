@@ -5,20 +5,23 @@ import { CaptureService } from '../services/capture.service';
 import { ChosenRulesService } from '../services/chosen-rules.service';
 import { SavedNuzlockesService } from '../services/saved-nuzlockes.service';
 
+import { Storage } from '@ionic/storage-angular';
+
 @Component({
 	selector: 'app-criar',
 	templateUrl: './criar.page.html',
 	styleUrls: ['./criar.page.scss'],
 })
+
 export class CriarPage implements OnInit {
 
-	
 	constructor(
 		private alertCtrl: AlertController,
 		public chosenRulesService: ChosenRulesService,
 		public savedNuzlockesService: SavedNuzlockesService,
 		public captureService: CaptureService,
-		public router: Router
+		public router: Router,
+		public storage: Storage
 	){}
 
 	ngOnInit() {
@@ -85,6 +88,7 @@ export class CriarPage implements OnInit {
 			this.router.navigate(['/nuzlocke/pokemon-manager']);
 		}
 	}
+
 	public createNuzlocke(){
 		let generation = this.selectedGame == 'Red' ? 1 : 2;
 
@@ -103,18 +107,20 @@ export class CriarPage implements OnInit {
 		this.savedNuzlockesService.loadNuzlocke(newNuzlocke);
 
 		this.notificateCreation();
+
+		this.savedNuzlockesService.updateDatabase();
 	}
 
-  public async notificateCreation() {
+	public async notificateCreation(){
 		const alert = await this.alertCtrl.create({
 			header: 'Nuzlocke criado!',
 			message: 'O seu novo Nuzlocke foi criado com sucesso',
 			buttons: [
 				{
-					text: 'OK!',
-					handler: () => console.log('Nome: ' + this.newNuzlockeName + '. Jogo: ' + this.selectedGame)
+					text: 'OK!'
 				},
 			]
 		});
+		alert.present();
 	}
 }

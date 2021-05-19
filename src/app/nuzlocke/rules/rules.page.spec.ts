@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-@Component({
-  selector: 'app-rules',
-  templateUrl: './rules.page.html',
-  styleUrls: ['./rules.page.scss'],
-})
-export class RulesPage implements OnInit {
+import { RulesPage } from './rules.page';
 
-  constructor() { }
+describe('RulesPage', () => {
+  let component: RulesPage;
+  let fixture: ComponentFixture<RulesPage>;
 
-  ngOnInit() {
-  }
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ RulesPage ],
+      imports: [IonicModule.forRoot()]
+    }).compileComponents();
 
-}
+    fixture = TestBed.createComponent(RulesPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

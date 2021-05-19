@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 import { ChosenRulesService } from 'src/app/services/chosen-rules.service';
 import { OwnedPokemonService } from 'src/app/services/owned-pokemon.service';
 import { PokemonDatabaseService } from 'src/app/services/pokemon-database.service';
@@ -16,7 +17,7 @@ export class CaughtPokemonEditComponent implements OnInit {
 
 	public errorMessage;
 	public invalid;
-
+	
 	public currentPokemonStatus;
 
 	constructor(
@@ -24,19 +25,20 @@ export class CaughtPokemonEditComponent implements OnInit {
 		public pokemonDatabaseService: PokemonDatabaseService,
 		public ownedPokemonService: OwnedPokemonService,
 		public chosenRulesService: ChosenRulesService,
-		public savedNuzlockesService: SavedNuzlockesService
+		public savedNuzlockesService: SavedNuzlockesService,
+		public storage: Storage
 	){
-
+		
 	}
 
 	ngOnInit() {
-
 		this.currentPokemonStatus = this.pokemon_chosen.status;
 	}
 
 	public levelUp() {
 		if(this.pokemon_chosen.level < 100){
 			this.pokemon_chosen.level++;
+			this.savedNuzlockesService.updateDatabase();
 		}
 	}
 
@@ -59,9 +61,9 @@ export class CaughtPokemonEditComponent implements OnInit {
 	public async confirmStatusChange(){
 		let newStatus = this.pokemon_chosen.status;
 		let oldStatus = this.currentPokemonStatus;
-
+		
 		const alert = await this.alertCtrl.create({
-			message: 'Deseja mesmo transferir esse Pokémon de "' +
+			message: 'Deseja mesmo transferir esse Pokémon de "' + 
 						oldStatus + '" para "' +
 						newStatus + '"?',
 			buttons: [
@@ -75,7 +77,7 @@ export class CaughtPokemonEditComponent implements OnInit {
 				},
 			]
 		});
-
+		
 		if(this.hasDismissed){
 			this.pokemon_chosen.status = oldStatus;
 			this.ownedPokemonService.applyStatusFilterNoStatus();
@@ -93,6 +95,8 @@ export class CaughtPokemonEditComponent implements OnInit {
 			} else {
 				this.invalid = false;
 				this.pokemon_chosen.status = newStatus;
+
+				this.savedNuzlockesService.updateDatabase();
 			}
 			this.currentPokemonStatus = this.pokemon_chosen.status;
 		} else {
@@ -109,6 +113,7 @@ export class CaughtPokemonEditComponent implements OnInit {
 		} else {
 			this.chooseEvolution(this.pokemon_chosen.pokemon.evolveToIds);
 		}
+		this.savedNuzlockesService.updateDatabase();
 	}
 
 	public evolveToId(idToEvolve){
@@ -132,7 +137,7 @@ export class CaughtPokemonEditComponent implements OnInit {
 			);
 		}
 		evolutions.push("Voltar");
-
+		
 		const alert = await this.alertCtrl.create({
 			message: 'Qual é a evolução desejada?',
 			buttons: evolutions
@@ -144,7 +149,7 @@ export class CaughtPokemonEditComponent implements OnInit {
 		let partySize = this.ownedPokemonService.allPokemon.filter(
 			owned => owned.status == "Party"
 		).length;
-
+		
 		if(
 			oldStatus == "Party" &&
 			partySize == 1 &&
@@ -175,9 +180,9 @@ export class CaughtPokemonEditComponent implements OnInit {
 				return true;
 			}
 			this.savedNuzlockesService.currentNuzlocke.revivingChances--;
-			} else {
-			if(
-				newStatus == "Party" &&
+		} else {
+			if(	
+				newStatus == "Party" && 
 				partySize == 6
 			){
 				this.errorMessage = "A Party já está cheia. Retire dela o Pokémon que " +

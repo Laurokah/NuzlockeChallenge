@@ -12,7 +12,6 @@ import { SavedNuzlockesService } from 'src/app/services/saved-nuzlockes.service'
 })
 export class GymsPage implements OnInit {
 
-	constructor(private alertCtrl: AlertController) { }
 	constructor(
 		private alertCtrl: AlertController,
 		public completedGymsService: CompletedGymsService,
@@ -20,20 +19,23 @@ export class GymsPage implements OnInit {
 		public ownedPokemonService: OwnedPokemonService,
 		public savedNuzlockesService: SavedNuzlockesService
 	){}
+
 	ngOnInit() {
 	}
+
 	public errorMessage;
 	public invalid;
 
 	public challengingGym = false;
 	public challengingGymMessage = "Estou pronto para desafiar o ginásio";
+
 	public selectedBadgeNumber = 0;
 
 	public shouldGymOptionsAppear(){
-		return 	this.completedGymsService.lastCompletedBadgeNumber != 8 &&
-		!this.savedNuzlockesService.currentNuzlocke.completed;
+		return 	this.completedGymsService.lastCompletedBadgeNumber != 8 && 
+				!this.savedNuzlockesService.currentNuzlocke.completed;
 	}
-
+	
 	public doesChosenRuleAffectMinimumLevels(){
 		return this.chosenRulesService.chosenGymsRule.description != 'Não há restrições de nível para desafiar os ginásios';
 	}
@@ -45,7 +47,7 @@ export class GymsPage implements OnInit {
 		}
 	}
 
-	public arePokemonLevelsSuitable(){
+	public arePokemonLevelsSuitable(){		
 		let twoLevelsLowerThanStrongerPokemon = this.completedGymsService.nextBadge.greatestLevel - 2;
 		let sameLevelThanWeakerPokemon = this.completedGymsService.nextBadge.lowestLevel;
 
@@ -64,15 +66,15 @@ export class GymsPage implements OnInit {
 				this.chosenRulesService.chosenGymsRule.description == "Os Pokémon devem estar a 2 níveis abaixo do Pokémon mais forte do líder" &&
 				partyPokemon.level < twoLevelsLowerThanStrongerPokemon
 			){
-				this.errorMessage = 'Você deve upar todos os seus Pokémon até o level mínimo de ' +
+				this.errorMessage = 'Você deve upar todos os seus Pokémon até o level mínimo de ' + 
 									twoLevelsLowerThanStrongerPokemon + ' antes de enfrentar o próximo ginásio';
-				this.invalid = true;
+				this.invalid = true;									
 				return false;
 			} else if(
 				this.chosenRulesService.chosenGymsRule.description == "Os Pokémon devem estar no mesmo nível do Pokémon mais fraco do líder" &&
 				partyPokemon.level < sameLevelThanWeakerPokemon
 			){
-				this.errorMessage = 'Você deve upar todos os seus Pokémon até o level mínimo de ' +
+				this.errorMessage = 'Você deve upar todos os seus Pokémon até o level mínimo de ' + 
 									sameLevelThanWeakerPokemon + ' antes de enfrentar o próximo ginásio';
 				this.invalid = true;
 				return false;
@@ -104,7 +106,6 @@ export class GymsPage implements OnInit {
 		).length == 0;
 	}
 
-
 	public async confirmGymCompletion() {
 		const alert = await this.alertCtrl.create({
 			header: 'Concluir ginásio',
@@ -126,6 +127,7 @@ export class GymsPage implements OnInit {
 		);
 		concludedBadge.iconSource = concludedBadge.checkedIcon;
 		concludedBadge.completed = true;
+
 		this.completedGymsService.lastCompletedBadgeNumber = concludedBadge.number;
 		this.completedGymsService.nextBadge = this.completedGymsService.badges.find(
 			badge => badge.number == this.completedGymsService.lastCompletedBadgeNumber + 1
@@ -138,5 +140,8 @@ export class GymsPage implements OnInit {
 		this.challengingGym = false;
 		this.challengingGymMessage = "Estou pronto para desafiar o ginásio";
 		this.savedNuzlockesService.currentNuzlocke.completedGyms++;
+
+		this.savedNuzlockesService.updateDatabase();
 	}
+
 }

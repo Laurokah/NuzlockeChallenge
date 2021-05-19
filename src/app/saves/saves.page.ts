@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 import { SavedNuzlockesService } from '../services/saved-nuzlockes.service';
 
 @Component({
@@ -13,10 +14,16 @@ export class SavesPage implements OnInit {
 	constructor(
 		public router: Router,
 		public savedNuzlockesService: SavedNuzlockesService,
-		public alertController: AlertController
+		public alertController: AlertController,
+		public storage: Storage
 	) { }
 
 	ngOnInit() {
+		if(this.savedNuzlockesService.nuzlockes.length == 0){
+			this.storage.get('nuzlockes').then(
+				nuzlocke => this.savedNuzlockesService.nuzlockes.push(...nuzlocke)
+			);
+		}
 	}
 
 	public redirectToNuzlocke(nuzlocke){
@@ -27,9 +34,11 @@ export class SavesPage implements OnInit {
 	public deleteNuzlocke(nuzlocke){
 		this.savedNuzlockesService.nuzlockes.splice(
 			this.savedNuzlockesService.nuzlockes.indexOf(nuzlocke), 1);
+
+		this.savedNuzlockesService.updateDatabase();
 	}
 
-
+	
 	public async confirmDeleting(nuzlocke) {
 		const alert = await this.alertController.create({
 			header: 'Atenção!',
@@ -45,6 +54,3 @@ export class SavesPage implements OnInit {
 		alert.present();
 	}
 }
-
-	
-

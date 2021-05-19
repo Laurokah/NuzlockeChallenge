@@ -53,5 +53,6 @@ export class PokemonManagerPage implements OnInit {
 
 	public addRevivalChance(){
 		this.savedNuzlockesService.currentNuzlocke.revivingChances++;
+		this.savedNuzlockesService.updateDatabase();
 	}
 }
