@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CaptureService } from 'src/app/services/capture.service';
 import { OwnedPokemonService } from 'src/app/services/owned-pokemon.service';
 import { PokemonDatabaseService } from 'src/app/services/pokemon-database.service';
+import { SavedNuzlockesService } from 'src/app/services/saved-nuzlockes.service';
 
 @Component({
 	selector: 'app-register',
@@ -15,7 +16,8 @@ export class RegisterPage implements OnInit {
 		public router: Router,
 		private captureService: CaptureService,
 		public pokemonDatabaseService: PokemonDatabaseService,
-		public ownedPokemonService: OwnedPokemonService
+		public ownedPokemonService: OwnedPokemonService,
+		public savedNuzlockesService: SavedNuzlockesService
 	) {}
 
 	ngOnInit() {
@@ -39,7 +41,9 @@ export class RegisterPage implements OnInit {
 				pokemon: this.chosenDataPokemon
 			};
 			this.captureService.registerPokemon(savedPokemon);
-			
+
+			this.savedNuzlockesService.currentNuzlocke.ownedPokemon = this.ownedPokemonService.allPokemon;
+
 			this.router.navigate(['/nuzlocke/encounters']);
 		} else {
 			this.invalid = true;

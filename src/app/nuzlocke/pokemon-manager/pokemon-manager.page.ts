@@ -24,6 +24,18 @@ export class PokemonManagerPage implements OnInit {
 
 
 	public currentStatus = "Party";
+	public searchInput;
+
+	public filterByName(){
+		let formattedInput = this.searchInput.toUpperCase();
+		if(this.searchInput == null || this.searchInput == ""){
+			this.ownedPokemonService.applyStatusFilter(this.currentStatus);
+		} else {
+			this.ownedPokemonService.filteredPokemon = this.ownedPokemonService.statusFilteredPokemon.filter(
+				owned => owned.pokemon.species.toUpperCase().includes(formattedInput) || (owned.nickname != null && owned.nickname.toUpperCase().includes(formattedInput))
+			);
+		}
+	}
 
 	public redirectToOwnedUrl(url){
 		this.router.navigate(['/nuzlocke/pokemon-manager/' + url]);

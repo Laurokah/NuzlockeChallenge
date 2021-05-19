@@ -8,6 +8,13 @@
 </ion-header>
 
 <ion-content>
+	<ion-item>
+		<ion-label class="search_placeholder_style" position="floating">
+			<ion-icon slot="icon-only" name="search"></ion-icon>
+			&nbsp;&nbsp;Buscar Pokémon por nome/espécie
+		</ion-label>
+		<ion-input [(ngModel)]="searchInput" (ionChange)="filterByName()" type="text" class="input_style"></ion-input>
+	</ion-item>
 	<ion-segment [(ngModel)]="currentStatus" (ngModelChange)="this.ownedPokemonService.applyStatusFilter(this.currentStatus)">
 		<ion-segment-button value="Party">
 			<ion-label class="label_style">Party</ion-label>
