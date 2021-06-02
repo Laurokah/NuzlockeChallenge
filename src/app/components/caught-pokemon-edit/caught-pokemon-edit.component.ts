@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
+import { NuzlockeOwnedPokemon } from 'src/app/models/Nuzlocke-Models';
 import { ChosenRulesService } from 'src/app/services/chosen-rules.service';
 import { OwnedPokemonService } from 'src/app/services/owned-pokemon.service';
 import { PokemonDatabaseService } from 'src/app/services/pokemon-database.service';
@@ -13,7 +14,7 @@ import { SavedNuzlockesService } from 'src/app/services/saved-nuzlockes.service'
 })
 export class CaughtPokemonEditComponent implements OnInit {
 
-	@Input() pokemon_chosen;
+	@Input() chosen_pokemon: NuzlockeOwnedPokemon;
 
 	public errorMessage;
 	public invalid;
@@ -21,23 +22,23 @@ export class CaughtPokemonEditComponent implements OnInit {
 	public currentPokemonStatus;
 
 	constructor(
-		private alertCtrl: AlertController,
-		public pokemonDatabaseService: PokemonDatabaseService,
-		public ownedPokemonService: OwnedPokemonService,
-		public chosenRulesService: ChosenRulesService,
-		public savedNuzlockesService: SavedNuzlockesService,
-		public storage: Storage
+		private alertCtrl             : AlertController,
+		public  pokemonDatabaseService: PokemonDatabaseService,
+		public  ownedPokemonService   : OwnedPokemonService,
+		public  chosenRulesService    : ChosenRulesService,
+		public  savedNuzlockesService : SavedNuzlockesService,
+		public  storage               : Storage
 	){
 		
 	}
 
 	ngOnInit() {
-		this.currentPokemonStatus = this.pokemon_chosen.status;
+		this.currentPokemonStatus = this.chosen_pokemon.status;
 	}
 
-	public levelUp() {
-		if(this.pokemon_chosen.level < 100){
-			this.pokemon_chosen.level++;
+	public levelUp(){
+		if(this.chosen_pokemon.level < 100){
+			this.chosen_pokemon.level++;
 			this.savedNuzlockesService.updateDatabase();
 		}
 	}
@@ -59,7 +60,7 @@ export class CaughtPokemonEditComponent implements OnInit {
 
 	public hasDismissed = true;
 	public async confirmStatusChange(){
-		let newStatus = this.pokemon_chosen.status;
+		let newStatus = this.chosen_pokemon.status;
 		let oldStatus = this.currentPokemonStatus;
 		
 		const alert = await this.alertCtrl.create({
@@ -79,7 +80,7 @@ export class CaughtPokemonEditComponent implements OnInit {
 		});
 		
 		if(this.hasDismissed){
-			this.pokemon_chosen.status = oldStatus;
+			this.chosen_pokemon.status = oldStatus;
 			this.ownedPokemonService.applyStatusFilterNoStatus();
 		}
 
@@ -91,33 +92,33 @@ export class CaughtPokemonEditComponent implements OnInit {
 		if(doChange){
 			if(this.isChangeInvalid(newStatus, oldStatus)){
 				this.invalid = true;
-				this.pokemon_chosen.status = oldStatus;
+				this.chosen_pokemon.status = oldStatus;
 			} else {
 				this.invalid = false;
-				this.pokemon_chosen.status = newStatus;
+				this.chosen_pokemon.status = newStatus;
 
 				this.savedNuzlockesService.updateDatabase();
 			}
-			this.currentPokemonStatus = this.pokemon_chosen.status;
+			this.currentPokemonStatus = this.chosen_pokemon.status;
 		} else {
 			this.invalid = false;
-			this.pokemon_chosen.status = oldStatus;
+			this.chosen_pokemon.status = oldStatus;
 		}
 		this.hasDismissed = true;
 		this.ownedPokemonService.applyStatusFilterNoStatus();
 	}
 
 	public evolvePokemon(){
-		if(this.pokemon_chosen.pokemon.evolveToIds.length == 1){
-			this.evolveToId(this.pokemon_chosen.pokemon.evolveToIds[0]);
+		if(this.chosen_pokemon.pokemon.evolveToIds.length == 1){
+			this.evolveToId(this.chosen_pokemon.pokemon.evolveToIds[0]);
 		} else {
-			this.chooseEvolution(this.pokemon_chosen.pokemon.evolveToIds);
+			this.chooseEvolution(this.chosen_pokemon.pokemon.evolveToIds);
 		}
 		this.savedNuzlockesService.updateDatabase();
 	}
 
 	public evolveToId(idToEvolve){
-		this.pokemon_chosen.pokemon =  this.pokemonDatabaseService.allPokemon.find(
+		this.chosen_pokemon.pokemon = this.pokemonDatabaseService.allPokemon.find(
 			pokemon => pokemon.id == idToEvolve
 		);
 	}

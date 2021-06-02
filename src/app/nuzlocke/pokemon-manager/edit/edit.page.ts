@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NuzlockeOwnedPokemon } from 'src/app/models/Nuzlocke-Models';
 import { OwnedPokemonService } from 'src/app/services/owned-pokemon.service';
 
 @Component({
@@ -10,8 +11,8 @@ import { OwnedPokemonService } from 'src/app/services/owned-pokemon.service';
 export class EditPage implements OnInit {
 
 	constructor(
-		private route: ActivatedRoute,
-		public ownedPokemonService: OwnedPokemonService
+		private route              : ActivatedRoute,
+		public  ownedPokemonService: OwnedPokemonService
 	){
 		this.pokemon_to_pass = this.ownedPokemonService.allPokemon.find(
 			owned => owned.url == 'edit/' + this.idValue
@@ -22,7 +23,7 @@ export class EditPage implements OnInit {
 	}
 
 	public idValue = this.route.snapshot.paramMap.get('id');
-	public pokemon_to_pass;
+	public pokemon_to_pass: NuzlockeOwnedPokemon;
 
 	
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NuzlockeOwnedPokemon } from '../models/Nuzlocke-Models';
 
 @Injectable({
 	providedIn: 'root'
@@ -9,9 +10,9 @@ export class OwnedPokemonService {
 
 	public currentFilteredStatus = "Party";
 
-	public allPokemon = [];
-	public filteredPokemon = [];
-	public statusFilteredPokemon = [];
+	public allPokemon: NuzlockeOwnedPokemon[] = [];
+	public filteredPokemon: NuzlockeOwnedPokemon[] = [];
+	public statusFilteredPokemon: NuzlockeOwnedPokemon[] = [];
 
 	public applyStatusFilterNoStatus(){
 		this.applyStatusFilter(this.currentFilteredStatus);
@@ -27,5 +28,19 @@ export class OwnedPokemonService {
 			this.allPokemon.filter(
 				owned => owned.status === currentStatus
 			);
+	}
+	
+	public isThereNickname(nickname: string){
+		return 	nickname != null &&
+				!this.isStringAllWhitespaces(nickname);
+	}
+
+	public isStringAllWhitespaces(word: string){
+		for (const letter of word.split('')){
+			if(letter != ''){
+				return false;
+			}
+		}
+		return true;
 	}
 }

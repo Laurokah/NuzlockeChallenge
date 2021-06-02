@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { NuzlockeOwnedPokemon } from 'src/app/models/Nuzlocke-Models';
 import { CaptureService } from 'src/app/services/capture.service';
 import { OwnedPokemonService } from 'src/app/services/owned-pokemon.service';
 import { PokemonDatabaseService } from 'src/app/services/pokemon-database.service';
@@ -14,12 +15,12 @@ import { SavedNuzlockesService } from 'src/app/services/saved-nuzlockes.service'
 export class RegisterPage implements OnInit {
 
 	constructor(
-		public router: Router,
-		private captureService: CaptureService,
-		public pokemonDatabaseService: PokemonDatabaseService,
-		public ownedPokemonService: OwnedPokemonService,
-		public savedNuzlockesService: SavedNuzlockesService,
-		public storage: Storage
+		public  router                : Router,
+		private captureService        : CaptureService,
+		public  pokemonDatabaseService: PokemonDatabaseService,
+		public  ownedPokemonService   : OwnedPokemonService,
+		public  savedNuzlockesService : SavedNuzlockesService,
+		public  storage               : Storage
 	) {}
 
 	ngOnInit() {
@@ -35,12 +36,12 @@ export class RegisterPage implements OnInit {
 	public saveEncounter(){
 		if(!this.isInputInvalid()){
 			this.invalid = false;
-			let savedPokemon = {
-				url: null,
-				status: null,
+			let savedPokemon: NuzlockeOwnedPokemon = {
+				url     : null,
+				status  : null,
 				nickname: this.pokemonNickname,
-				level: this.pokemonLevel,
-				pokemon: this.chosenDataPokemon
+				level   : this.pokemonLevel,
+				pokemon : this.chosenDataPokemon
 			};
 			this.captureService.registerPokemon(savedPokemon);
 
