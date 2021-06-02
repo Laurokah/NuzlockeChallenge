@@ -4,6 +4,7 @@ import { OwnedPokemonService } from './owned-pokemon.service';
 import { CaptureService } from './capture.service';
 import { CompletedGymsService } from './completed-gyms.service';
 import { Storage } from '@ionic/storage-angular';
+import { Nuzlocke } from '../models/Nuzlocke-Models';
 
 @Injectable({
 	providedIn: 'root'
@@ -11,16 +12,15 @@ import { Storage } from '@ionic/storage-angular';
 export class SavedNuzlockesService {
 
 	constructor(
-		public ownedPokemonService: OwnedPokemonService,
-		public chosenRulesService: ChosenRulesService,
-		public captureService: CaptureService,
+		public ownedPokemonService : OwnedPokemonService,
+		public chosenRulesService  : ChosenRulesService,
+		public captureService      : CaptureService,
 		public completedGymsService: CompletedGymsService,
-		public storage: Storage
+		public storage : Storage
 	){}
 
-	public nuzlockes = [];
-
-	public currentNuzlocke;
+	public nuzlockes: Nuzlocke[] = [];
+	public currentNuzlocke : Nuzlocke;
 
 	public loadNuzlocke(nuzlocke){
 		this.currentNuzlocke = nuzlocke;
@@ -49,6 +49,10 @@ export class SavedNuzlockesService {
 		this.completedGymsService.lastCompletedBadgeNumber = this.currentNuzlocke.completedGyms;
 	}
 
+	public isNuzlockeCompleted(){
+		return this.currentNuzlocke.completed;
+	}
+	
 	public updateDatabase(){
 		this.storage.set('nuzlockes', this.nuzlockes);
 	}

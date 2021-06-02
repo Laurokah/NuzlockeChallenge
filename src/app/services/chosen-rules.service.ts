@@ -1,12 +1,20 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, Version } from '@angular/core';
+import { Region } from '../models/API-Models';
+import { NuzlockeGame, NuzlockeRule } from '../models/Nuzlocke-Models';
+import { CaptureService } from './capture.service';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ChosenRulesService {
 
-	constructor() { }
+	constructor(
+		public http          : HttpClient,
+		public captureService: CaptureService
+	){}
 
+	public availableGames: NuzlockeGame[] = [];
 	public availableRules = [
 		{
 			id: 'Captura',
@@ -98,20 +106,20 @@ export class ChosenRulesService {
 	}
 
 	public areAllRulesSelected(){
-		return	this.chosenCaptureRule != null &&
-				this.chosenRecaptureRule != null &&
-				this.chosenRevivalRule != null &&
-				this.chosenDeathRule != null &&
-				this.chosenGymsRule != null &&
+		return  this.chosenCaptureRule 	     != null &&
+				this.chosenRecaptureRule     != null &&
+				this.chosenRevivalRule       != null &&
+				this.chosenDeathRule         != null &&
+				this.chosenGymsRule          != null &&
 				this.chosenRandomizationRule != null;
 	}
 
-	public chosenCaptureRule;
-	public chosenRecaptureRule;
-	public chosenDeathRule;
-	public chosenRevivalRule;
-	public chosenGymsRule;
-	public chosenRandomizationRule;
+	public chosenCaptureRule      : NuzlockeRule;
+	public chosenRecaptureRule    : NuzlockeRule;
+	public chosenDeathRule        : NuzlockeRule;
+	public chosenRevivalRule      : NuzlockeRule;
+	public chosenGymsRule         : NuzlockeRule;
+	public chosenRandomizationRule: NuzlockeRule;
 
 	public returnChosenRules(){
 		return [
@@ -125,11 +133,126 @@ export class ChosenRulesService {
 	}
 
 	public resetRules(){
-		this.chosenCaptureRule = null;
-		this.chosenRecaptureRule = null;
-		this.chosenDeathRule = null;
-		this.chosenRevivalRule = null;
-		this.chosenGymsRule = null;
+		this.chosenCaptureRule       = null;
+		this.chosenRecaptureRule     = null;
+		this.chosenDeathRule         = null;
+		this.chosenRevivalRule       = null;
+		this.chosenGymsRule          = null;
 		this.chosenRandomizationRule = null;
+	}
+
+	public async buildGamesListFromAPI(){
+		this.availableGames = [];
+		this.captureService.avalilableVersionGroups = [];
+		this.captureService.allLocations = [];
+
+		let url;
+		let result;
+
+		let i = 1;
+		let isThere404Exception = false;
+
+		for(i = 1; i <= 6; i++){
+			url = 'https://pokeapi.co/api/v2/region/' + i;
+			result = await this.http.get<Region>(url).toPromise();
+
+			let regionVersionGroups = [];
+			for(const versionGroup of result['version_groups']){
+				let versionGroupName = versionGroup['name'];
+				if(!versionGroupName.includes('lets-go')){
+					regionVersionGroups.push(versionGroupName);
+					this.captureService.avalilableVersionGroups.push(versionGroupName );
+				}
+			}
+
+			for (const location of result['locations']){
+				this.captureService.allLocations.push({
+					name: this.formatRouteName(location['name']),
+					versionGroups: regionVersionGroups
+				});
+			}
+
+		}
+		i = 1;
+		while(!isThere404Exception){
+			url = 'https://pokeapi.co/api/v2/version/' + i++;
+			try{
+				result = await this.http.get<Version>(url).toPromise();
+
+				let gameVersionGroup = result['version_group']['name'];
+				if(this.captureService.avalilableVersionGroups.includes(gameVersionGroup)){
+					this.availableGames.push({
+						name: this.formatGameName(result['name']),
+						versionGroup: gameVersionGroup
+					});
+				}
+			} catch(error) {
+				if(error.status == 404){
+					isThere404Exception = true;
+				}
+			}
+		}
+	}
+
+	public formatRouteName(nameToFormat){
+		nameToFormat = nameToFormat.replaceAll('-', ' ');
+
+		let returnString = '';
+		let lastWasSpace = false;
+		for (let index = 0; index < nameToFormat.length; index++) {
+			if(index == 0 || lastWasSpace){
+				returnString += nameToFormat[index].toUpperCase();
+				lastWasSpace = false;
+			} else {
+				returnString += nameToFormat[index];	
+			}
+			if(nameToFormat[index] == ' '){
+				lastWasSpace = true;
+			}
+		}
+		return returnString;
+	}
+
+	public formatGameName(nameToFormat){
+		let fromTo = [
+			{
+				from: 'firered',
+				to: 'Fire Red'
+			},
+			{
+				from: 'leafgreen',
+				to: 'Leaf Green'
+			},
+			{
+				from: 'heartgold',
+				to: 'Heart Gold'
+			},
+			{
+				from: 'soulsilver',
+				to: 'Soul Silver'
+			}
+		];
+
+		let chosenFromTo = fromTo.find(fromTo => fromTo.from == nameToFormat);
+		if(chosenFromTo != null){
+			return chosenFromTo.to;
+		} else {
+			nameToFormat = nameToFormat.replaceAll('-', ' ');
+
+			let returnString = '';
+			let lastWasSpace = false;
+			for (let index = 0; index < nameToFormat.length; index++) {
+				if(index == 0 || lastWasSpace){
+					returnString += nameToFormat[index].toUpperCase();
+					lastWasSpace = false;
+				} else {
+					returnString += nameToFormat[index];	
+				}
+				if(nameToFormat[index] == ' '){
+					lastWasSpace = true;
+				}
+			}
+			return returnString;
+		}
 	}
 }

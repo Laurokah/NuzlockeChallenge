@@ -23,3 +23,31 @@ export interface PokemonSpecies {
     name                : string;
     evolves_from_species: NamedAPIResource;
 }
+
+export interface Location{
+    id    : number;
+    name  : string;
+    region: NamedAPIResource;
+}
+
+export interface Version{
+    id           : number;
+    name         : string;
+    version_group: NamedAPIResource;
+}
+
+export interface VersionGroup{
+    id        : number;
+    name      : string;
+    generation: NamedAPIResource;
+    regions   : NamedAPIResource[];
+    versions  : NamedAPIResource[];
+}
+
+export interface Region{
+    id             : number;
+    locations      : NamedAPIResource[];
+    name           : string;
+    main_generation: NamedAPIResource;
+    version_groups : NamedAPIResource[];
+}

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
+import { Nuzlocke } from '../models/Nuzlocke-Models';
 import { SavedNuzlockesService } from '../services/saved-nuzlockes.service';
 
 @Component({
@@ -12,10 +13,10 @@ import { SavedNuzlockesService } from '../services/saved-nuzlockes.service';
 export class SavesPage implements OnInit {
 
 	constructor(
-		public router: Router,
+		public router               : Router,
 		public savedNuzlockesService: SavedNuzlockesService,
-		public alertController: AlertController,
-		public storage: Storage
+		public alertController      : AlertController,
+		public storage              : Storage
 	) { }
 
 	ngOnInit() {
@@ -26,20 +27,21 @@ export class SavesPage implements OnInit {
 		}
 	}
 
-	public redirectToNuzlocke(nuzlocke){
+	public redirectToNuzlocke(nuzlocke: Nuzlocke){
 		this.savedNuzlockesService.loadNuzlocke(nuzlocke);
 		this.router.navigate(['/nuzlocke/pokemon-manager']);
 	}
 
-	public deleteNuzlocke(nuzlocke){
+	public deleteNuzlocke(nuzlocke: Nuzlocke){
 		this.savedNuzlockesService.nuzlockes.splice(
-			this.savedNuzlockesService.nuzlockes.indexOf(nuzlocke), 1);
-
+			this.savedNuzlockesService.nuzlockes.indexOf(nuzlocke), 1
+		);
+		
 		this.savedNuzlockesService.updateDatabase();
 	}
 
 	
-	public async confirmDeleting(nuzlocke) {
+	public async confirmDeleting(nuzlocke: Nuzlocke){
 		const alert = await this.alertController.create({
 			header: 'Atenção!',
 			message: 'Você deseja mesmo deletar esse Nuzlocke? Essa operação não pode ser desfeita',

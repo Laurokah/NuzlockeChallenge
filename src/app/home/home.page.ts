@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { PokemonDatabaseService } from '../services/pokemon-database.service';
 import { Storage } from '@ionic/storage-angular';
+import { ChosenRulesService } from '../services/chosen-rules.service';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +12,13 @@ export class HomePage {
 
   constructor(
 		public storage               : Storage,
-		public pokemonDatabaseService: PokemonDatabaseService
+		public pokemonDatabaseService: PokemonDatabaseService,
+		public chosenRulesService    : ChosenRulesService
 	){
 		this.storage.get('allPokemon').then(
 			pokemon =>  this.pokemonDatabaseService.allPokemon.push(...pokemon)
 		);
-		this.pokemonDatabaseService.buildPokemonListFromAPI();
+		this.chosenRulesService.buildGamesListFromAPI();
 	}
 
 }

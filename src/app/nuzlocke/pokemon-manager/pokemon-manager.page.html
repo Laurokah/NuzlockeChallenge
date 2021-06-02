@@ -30,13 +30,13 @@
 		<ion-item *ngIf="currentStatus == 'Morto' && doesRevivalRuleAllowReviving()">
 			<ion-img src="./assets/images/revive-icon.png" class="revive_img"></ion-img>
 			<ion-label class="reviving_chances_style">{{ this.savedNuzlockesService.currentNuzlocke.revivingChances }}</ion-label>
-			<ion-button *ngIf="isRevivalRuleBasedOnItem()" (click)="addRevivalChance()" [disabled]="this.savedNuzlockesService.currentNuzlocke.completed" class="add_revive_button">
+			<ion-button *ngIf="isRevivalRuleBasedOnItem()" (click)="addRevivalChance()" [disabled]="this.savedNuzlockesService.isNuzlockeCompleted()" class="add_revive_button">
 				<ion-icon slot="icon-only" name="add"></ion-icon>
 			</ion-button>
 		</ion-item>
 		<ion-item *ngFor="let owned of ownedPokemonService.filteredPokemon" (click)="redirectToOwnedUrl(owned.url)">
 			<ion-img [src]="owned.pokemon.iconSource"></ion-img>
-			<ion-label *ngIf="owned.nickname != null && owned.nickname != ''; else noNickname" class="pokemon_description">{{ owned.pokemon.species }}
+			<ion-label *ngIf="ownedPokemonService.isThereNickname(owned.nickname); else noNickname" class="pokemon_description">{{ owned.pokemon.species }}
 				<br>({{ owned.nickname }})</ion-label>
 			<ion-text class="pokemon_description">Level: {{ owned.level }}</ion-text>
 

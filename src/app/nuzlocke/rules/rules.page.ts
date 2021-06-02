@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NuzlockeRule } from 'src/app/models/Nuzlocke-Models';
 import { ChosenRulesService } from 'src/app/services/chosen-rules.service';
 import { SavedNuzlockesService } from 'src/app/services/saved-nuzlockes.service';
 
@@ -10,14 +11,14 @@ import { SavedNuzlockesService } from 'src/app/services/saved-nuzlockes.service'
 export class RulesPage implements OnInit {
 
 	constructor(
-		public chosenRulesService: ChosenRulesService,
+		public chosenRulesService : ChosenRulesService,
 		public savedNuzlockesService: SavedNuzlockesService
 	) { }
 
 	ngOnInit() {
 	}
 
-	public rules = [
+	public rules: NuzlockeRule[] = [
 		this.chosenRulesService.chosenCaptureRule,
 		this.chosenRulesService.chosenRecaptureRule,
 		this.chosenRulesService.chosenDeathRule,

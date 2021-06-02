@@ -12,16 +12,13 @@ import { SavedNuzlockesService } from 'src/app/services/saved-nuzlockes.service'
 export class PokemonManagerPage implements OnInit {
 
 	constructor(
-		public router: Router,
-		public ownedPokemonService: OwnedPokemonService,
-		public chosenRulesService: ChosenRulesService,
+		public router               : Router,
+		public ownedPokemonService  : OwnedPokemonService,
+		public chosenRulesService   : ChosenRulesService,
 		public savedNuzlockesService: SavedNuzlockesService
 	){}
 
-	ngOnInit() {
-	}
-
-
+	ngOnInit() {}
 
 	public currentStatus = "Party";
 	public searchInput;
@@ -38,7 +35,7 @@ export class PokemonManagerPage implements OnInit {
 	}
 
 	public redirectToOwnedUrl(url){
-		if(!this.savedNuzlockesService.currentNuzlocke.completed){
+		if(!this.savedNuzlockesService.isNuzlockeCompleted()){
 			this.router.navigate(['/nuzlocke/pokemon-manager/' + url]);
 		}
 	}

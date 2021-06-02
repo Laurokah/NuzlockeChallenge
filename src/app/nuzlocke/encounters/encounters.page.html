@@ -11,15 +11,15 @@
 	<ion-list class="label_style" *ngFor="let route of captureService.routes">
 		<ion-item>
 			<ion-grid fixed>
-				<ion-row (click)="route.waiting? registerEncounter(captureService.routes.indexOf(route)): makeNothing()">
+				<ion-row (click)="route.waiting? registerEncounter(route): makeNothing()">
 					<ion-col size="4">
 						<ion-icon [name]="route.iconName"></ion-icon>&nbsp;&nbsp;
 						<ion-text  class="label_style">{{ route.name }}</ion-text>
 					</ion-col>
 					<ion-col size="8">
-						<ion-item *ngIf="route.successful && route.species != null">
+						<ion-item *ngIf="route.successful">
 							<ion-img [src]="route.iconSource"></ion-img>
-							<ion-label *ngIf="route.nickname != null && route.nickname != ''; else noNickname" class="pokemon_detail_style">{{ route.species }}
+							<ion-label *ngIf="ownedPokemonService.isThereNickname(route.nickname); else noNickname" class="pokemon_detail_style">{{ route.species }}
 								<br>({{ route.nickname }})
 								<br>Level: {{ route.level }}
 							</ion-label>

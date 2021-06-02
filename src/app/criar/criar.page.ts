@@ -6,6 +6,8 @@ import { ChosenRulesService } from '../services/chosen-rules.service';
 import { SavedNuzlockesService } from '../services/saved-nuzlockes.service';
 
 import { Storage } from '@ionic/storage-angular';
+import { Nuzlocke, NuzlockeGame, NuzlockeRoute } from '../models/Nuzlocke-Models';
+import { CompletedGymsService } from '../services/completed-gyms.service';
 
 @Component({
 	selector: 'app-criar',
@@ -16,12 +18,13 @@ import { Storage } from '@ionic/storage-angular';
 export class CriarPage implements OnInit {
 
 	constructor(
-		private alertCtrl: AlertController,
-		public chosenRulesService: ChosenRulesService,
-		public savedNuzlockesService: SavedNuzlockesService,
-		public captureService: CaptureService,
-		public router: Router,
-		public storage: Storage
+		private alertCtrl            : AlertController,
+		public  chosenRulesService   : ChosenRulesService,
+		public  savedNuzlockesService: SavedNuzlockesService,
+		public  captureService       : CaptureService,
+		public  completedGymsService : CompletedGymsService,
+		public  router               : Router,
+		public  storage              : Storage
 	){}
 
 	ngOnInit() {
@@ -31,43 +34,7 @@ export class CriarPage implements OnInit {
 	public invalid = false;
 
 	public newNuzlockeName;
-	public selectedGame;
-
-	public games = [
-		"Red",
-		"Blue",
-		"Green",
-		"Yellow",
-		"Gold",
-		"Silver",
-		"Crystal",
-		"Ruby",
-		"Sapphire",
-		"Emerald",
-		"Diamond",
-		"Pearl",
-		"Platinum",
-		"Black",
-		"White",
-		"Black 2",
-		"White 2",
-		"X",
-		"Y",
-		"Sun",
-		"Moon",
-		"Ultra Sun",
-		"Ultra Moon",
-		"Sword",
-		"Shield",
-		"Fire Red",
-		"Leaf Green",
-		"Heart Gold",
-		"Soul Silver",
-		"Omega Ruby",
-		"Alpha Sapphire",
-		"Brilliant Diamond",
-		"Shining Pearl",
-	];
+	public selectedGame: NuzlockeGame;
 
 	public resetInvalidFlag(){
 		this.invalid = false;
@@ -90,16 +57,42 @@ export class CriarPage implements OnInit {
 	}
 
 	public createNuzlocke(){
-		let generation = this.selectedGame == 'Red' ? 1 : 2;
+		let routes: NuzlockeRoute[] = [
+			{
+				name      : 'Inicial',
+				waiting   : true,
+				successful: false,
+				iconName  : 'time-outline',
+				level     : null,
+				nickname  : null,
+				species   : null,
+				iconSource: null
+			}
+		];
 
-		let newNuzlocke = {
-			name: this.newNuzlockeName,
-			game: this.selectedGame,
-			rules: this.chosenRulesService.returnChosenRules(),
-			completed: false,
-			completedGyms: 0,
-			ownedPokemon: [],
-			routes: this.captureService.clone(generation),
+		for (const location of this.captureService.allLocations.filter(
+			location => location.versionGroups.includes(this.selectedGame.versionGroup)
+		)){
+			routes.push({
+				name      : location.name,
+				waiting   : true,
+				successful: false,
+				iconName  : 'time-outline',
+				level     : null,
+				nickname  : null,
+				species   : null,
+				iconSource: null
+			});
+		}
+
+		let newNuzlocke: Nuzlocke = {
+			name           : this.newNuzlockeName,
+			game           : this.selectedGame,
+			rules          : this.chosenRulesService.returnChosenRules(),
+			completed      : false,
+			completedGyms  : 0,
+			ownedPokemon   : [],
+			routes         : routes,
 			revivingChances: 0
 		};
 		this.savedNuzlockesService.nuzlockes.push(newNuzlocke);

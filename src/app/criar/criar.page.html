@@ -15,7 +15,7 @@
 	<ion-item class="selectGame_options">
 		<ion-label class="selectGame_label">Escolha o jogo</ion-label>
 		<ion-select [(ngModel)]="selectedGame" multiple="false">
-			<ion-select-option *ngFor="let game of games" [value]="game">{{game}}</ion-select-option>
+			<ion-select-option *ngFor="let game of this.chosenRulesService.availableGames" [value]="game">{{game.name}}</ion-select-option>
 		</ion-select>
 	</ion-item>
 
