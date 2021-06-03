@@ -6,7 +6,7 @@ import { ChosenRulesService } from '../services/chosen-rules.service';
 import { SavedNuzlockesService } from '../services/saved-nuzlockes.service';
 
 import { Storage } from '@ionic/storage-angular';
-import { Nuzlocke, NuzlockeBadge, NuzlockeRoute } from '../models/Nuzlocke-Models';
+import { Nuzlocke, NuzlockeBadge, NuzlockeGame, NuzlockeRoute } from '../models/Nuzlocke-Models';
 import { CompletedGymsService } from '../services/completed-gyms.service';
 
 @Component({
@@ -105,7 +105,7 @@ export class CriarPage implements OnInit {
 			game           : this.selectedGame,
 			rules          : this.chosenRulesService.returnChosenRules(),
 			completed      : false,
-			badges		     : badges,
+			badges		   : badges,
 			ownedPokemon   : [],
 			routes         : routes,
 			revivingChances: 0
