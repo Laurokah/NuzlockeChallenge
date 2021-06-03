@@ -19,6 +19,6 @@ export class HomePage {
 			pokemon =>  this.pokemonDatabaseService.allPokemon.push(...pokemon)
 		);
 		this.chosenRulesService.buildGamesListFromAPI();
+		this.pokemonDatabaseService.buildPokemonListFromAPI();
 	}
-
 }
