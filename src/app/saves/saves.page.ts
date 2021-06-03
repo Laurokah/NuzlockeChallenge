@@ -27,6 +27,10 @@ export class SavesPage implements OnInit {
 		}
 	}
 
+	public completedGymsAmount(nuzlocke: Nuzlocke){
+		return nuzlocke.badges.filter(badge => badge.completed).length;
+	}
+	
 	public redirectToNuzlocke(nuzlocke: Nuzlocke){
 		this.savedNuzlockesService.loadNuzlocke(nuzlocke);
 		this.router.navigate(['/nuzlocke/pokemon-manager']);
@@ -36,11 +40,11 @@ export class SavesPage implements OnInit {
 		this.savedNuzlockesService.nuzlockes.splice(
 			this.savedNuzlockesService.nuzlockes.indexOf(nuzlocke), 1
 		);
-		
+
 		this.savedNuzlockesService.updateDatabase();
 	}
 
-	
+
 	public async confirmDeleting(nuzlocke: Nuzlocke){
 		const alert = await this.alertController.create({
 			header: 'Atenção!',

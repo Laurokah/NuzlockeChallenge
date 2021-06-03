@@ -6,7 +6,7 @@ import { ChosenRulesService } from '../services/chosen-rules.service';
 import { SavedNuzlockesService } from '../services/saved-nuzlockes.service';
 
 import { Storage } from '@ionic/storage-angular';
-import { Nuzlocke, NuzlockeGame, NuzlockeRoute } from '../models/Nuzlocke-Models';
+import { Nuzlocke, NuzlockeBadge, NuzlockeRoute } from '../models/Nuzlocke-Models';
 import { CompletedGymsService } from '../services/completed-gyms.service';
 
 @Component({
@@ -85,12 +85,27 @@ export class CriarPage implements OnInit {
 			});
 		}
 
+		let badges: NuzlockeBadge[] = [];
+		for (const badge of this.completedGymsService.templateBadges.find(
+			badgeSet => badgeSet.version_groups.includes(this.selectedGame.versionGroup)
+		).badges){
+			badges.push({
+				number       : badge.number,
+				completed    : false,
+				iconSource   : badge.uncheckedIcon,
+				uncheckedIcon: badge.uncheckedIcon,
+				checkedIcon  : badge.checkedIcon,
+				lowestLevel  : badge.lowestLevel,
+				greatestLevel: badge.greatestLevel
+			});
+		}
+
 		let newNuzlocke: Nuzlocke = {
 			name           : this.newNuzlockeName,
 			game           : this.selectedGame,
 			rules          : this.chosenRulesService.returnChosenRules(),
 			completed      : false,
-			completedGyms  : 0,
+			badges		     : badges,
 			ownedPokemon   : [],
 			routes         : routes,
 			revivingChances: 0

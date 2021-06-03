@@ -12,13 +12,8 @@
 	<ion-grid fixed>
 		<ion-row>
 			<ion-col *ngFor="let badge of this.completedGymsService.badges" size="3">
-				<ion-img *ngIf="badge.number <= 4" (click)="shouldGymBeMarked(badge.number)" [src]="badge.iconSource"></ion-img>
+				<ion-img (click)="shouldGymBeMarked(badge)" [src]="badge.iconSource"></ion-img>
 			</ion-col>
-		</ion-row>
-		<ion-row>
-			<ion-col *ngFor="let badge of this.completedGymsService.badges" size="3">
-			<ion-img *ngIf="badge.number >= 5 " (click)="shouldGymBeMarked(badge.number)" [src]="badge.iconSource"></ion-img>
-		</ion-col>
 		</ion-row>
 	</ion-grid>
 	<ion-item *ngIf="this.shouldGymOptionsAppear()">
@@ -36,8 +31,8 @@
 			Pokémon mais forte: Level {{this.completedGymsService.nextBadge.greatestLevel}}
 		</ion-label>
 	</ion-item>
-	<ion-button 
-	*ngIf="this.completedGymsService.lastCompletedBadgeNumber != 8 && !this.savedNuzlockesService.currentNuzlocke.completed && doesChosenRuleAffectMinimumLevels()"
+	<ion-button
+	*ngIf="shouldGymOptionsAppear() && doesChosenRuleAffectMinimumLevels()"
 	(click)="changeChallengingStatus()"
 	[class]="challengingGym ? 'challenging_gym' : 'not_challenging_gym'">
 		{{this.challengingGymMessage}}

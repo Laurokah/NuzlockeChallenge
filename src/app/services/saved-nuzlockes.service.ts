@@ -38,21 +38,14 @@ export class SavedNuzlockesService {
 		this.chosenRulesService.chosenGymsRule 			= chosenRules[4];
 		this.chosenRulesService.chosenRandomizationRule = chosenRules[5];
 
-		this.completedGymsService.resetGyms();
-		for (let i = 0; i < this.currentNuzlocke.completedGyms; i++){
-			let currentBadge = this.completedGymsService.badges[i];
-
-			currentBadge.iconSource = currentBadge.checkedIcon;
-			currentBadge.completed = true;
-		}
-		this.completedGymsService.nextBadge = this.completedGymsService.badges[this.currentNuzlocke.completedGyms]
-		this.completedGymsService.lastCompletedBadgeNumber = this.currentNuzlocke.completedGyms;
+		this.completedGymsService.badges = this.currentNuzlocke.badges;
+		this.completedGymsService.setNextAndLastBadgeOfLoadingNuzlocke();
 	}
 
 	public isNuzlockeCompleted(){
 		return this.currentNuzlocke.completed;
 	}
-	
+
 	public updateDatabase(){
 		this.storage.set('nuzlockes', this.nuzlockes);
 	}

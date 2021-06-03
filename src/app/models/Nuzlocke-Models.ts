@@ -3,7 +3,7 @@ export interface Nuzlocke{
     game           : NuzlockeGame;
     rules          : NuzlockeRule[];
     completed      : boolean;
-    completedGyms  : number,
+    badges		     : NuzlockeBadge[];
     ownedPokemon   : NuzlockeOwnedPokemon[];
     routes         : NuzlockeRoute[],
     revivingChances: number;
@@ -43,4 +43,14 @@ export interface NuzlockeRoute {
     nickname  : string;
     species   : string;
     iconSource: string;
+}
+
+export interface NuzlockeBadge{
+    number       : number;
+    completed    : boolean;
+    iconSource   : string;
+    uncheckedIcon: string;
+    checkedIcon  : string;
+    lowestLevel  : number;
+    greatestLevel: number;
 }

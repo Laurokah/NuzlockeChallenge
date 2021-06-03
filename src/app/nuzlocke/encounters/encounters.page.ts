@@ -29,7 +29,7 @@ export class EncountersPage implements OnInit {
 	public makeNothing(){}
 
 	public registerEncounter(route: NuzlockeRoute){
-		if(!this.savedNuzlockesService.currentNuzlocke.completed){
+		if(!this.savedNuzlockesService.isNuzlockeCompleted()){
 			if(
 				route.name != 'Inicial' &&
 				this.chosenRulesService.chosenRecaptureRule.description == "O encontro na rota é considerado perdido"

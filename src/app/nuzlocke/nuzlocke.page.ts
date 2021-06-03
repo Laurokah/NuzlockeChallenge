@@ -12,10 +12,10 @@ import { SavedNuzlockesService } from '../services/saved-nuzlockes.service';
 export class NuzlockePage implements OnInit {
 
 	constructor(
-		private alertCtrl: AlertController, 
-		private router: Router,
-		public savedNuzlockesService: SavedNuzlockesService,
-		public chosenRulesService: ChosenRulesService
+		private alertCtrl            : AlertController,
+		private router               : Router,
+		public  savedNuzlockesService: SavedNuzlockesService,
+		public  chosenRulesService   : ChosenRulesService
 	) {}
 
 	ngOnInit() {
