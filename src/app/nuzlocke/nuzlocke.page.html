@@ -10,7 +10,7 @@
 			<ion-icon slot="start" name="home"></ion-icon>
 			<ion-label class="label_style">Home Page</ion-label>
 		</ion-item>
-		<ion-item *ngIf="!this.savedNuzlockesService.currentNuzlocke.completed" (click)="confirmEnding()">
+		<ion-item *ngIf="!this.savedNuzlockesService.isNuzlockeCompleted()" (click)="confirmEnding()">
 			<ion-icon slot="start" name="trophy"></ion-icon>
 			<ion-label class="label_style">Finalizar Nuzlocke</ion-label>
 		</ion-item>
