@@ -1,0 +1,6 @@
+{
+	"appId": "br.com.anhembi.nuzlockecreator",
+	"appName": "Nuzlocke Creator",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Nuzlocke Creator</string>
+    <string name="title_activity_main">Nuzlocke Creator</string>
+    <string name="package_name">br.com.anhembi.nuzlockecreator</string>
+    <string name="custom_url_scheme">br.com.anhembi.nuzlockecreator</string>
+</resources>

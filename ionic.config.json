@@ -1,5 +1,7 @@
 {
   "name": "NuzlockeChallenge",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
